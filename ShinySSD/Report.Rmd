@@ -1,0 +1,104 @@
+---
+title: "report"
+author: "ShinySSD v.1.0.0"
+output: word_document 
+params:
+  Chemical: input$ChemicalName
+  Endpoint: input$Endpoint
+  Effect: input$Effect
+  OrganismLifestage: input$OrganismLifestage
+  ExposureMedia: input$ExposureMedia
+  PesticideType: input$PesticideType
+  ExposureType: input$ExposureType
+  SpeciesGroup: input$SpeciesGroup
+  outgof: dfgof
+  outhc5: dfhc5
+  outboot: dfboot
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(comment = NA)
+
+```
+
+## Input parameters
+##### chemical
+
+```{r chemical}
+params$Chemical
+
+```
+
+##### Endpoint
+```{r endpoint, echo=FALSE}
+params$Endpoint
+  
+```
+
+##### Effect
+```{r effect, echo=FALSE}
+params$Effect
+  
+```
+
+##### OrganismLifestage
+```{r OrganismLifestage, echo=FALSE}
+params$OrganismLifestage
+  
+```
+
+##### PesticideType
+```{r PesticideType, echo=FALSE}
+params$PesticideType
+  
+```
+
+##### ExposureType
+```{r ExposureType, echo=FALSE}
+params$ExposureType
+  
+```
+
+##### ExposureMedia
+```{r ExposureMedia, echo=FALSE}
+params$ExposureMedia
+  
+```
+
+##### SpeciesGroup
+```{r SpeciesGroup, echo=FALSE}
+params$SpeciesGroup
+  
+```
+
+## Plots
+
+```{r out, echo=FALSE, fig.cap="Goodnes of fit", out.width = '100%'}
+knitr::include_graphics("out.png")
+```
+
+```{r out2, echo=FALSE, fig.cap="Species Sensitivity Distribution", out.width = '100%'}
+knitr::include_graphics("out2.png")
+```
+
+
+##### Goodness of fit
+```{r dfgof, echo=FALSE}
+params$outgof
+  
+```
+
+##### Hazard COncentration
+```{r outhc5, echo=FALSE}
+params$outhc5
+  
+```
+
+##### Confidence Intervals
+```{r outboot, echo=FALSE}
+params$outboot
+  
+```
+  
