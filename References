@@ -23,17 +23,6 @@
   url = {http://ggplot2.org},
 }
 
-@Article{fitdistrplus,
-  title = {{fitdistrplus}: An {R} Package for Fitting Distributions},
-  author = {Marie Laure Delignette-Muller and Christophe Dutang},
-  journal = {Journal of Statistical Software},
-  year = {2015},
-  volume = {64},
-  number = {4},
-  pages = {1--34},
-  url = {http://www.jstatsoft.org/v64/i04/},
-}
-
 @Article{actuar,
   title = {actuar: An R Package for Actuarial Science},
   author = {Christophe Dutang and Vincent Goulet and Mathieu Pigeon},
@@ -45,6 +34,60 @@
   url = {http://www.jstatsoft.org/v25/i07},
 }
 
+@Article{belanger2016aquatic,
+  title={Aquatic toxicity structure-activity relationships for the zwitterionic surfactant alkyl dimethyl amine oxide to several aquatic species and a resulting species sensitivity distribution},
+  author={Belanger, Scott E and Brill, Jessica L and Rawlings, Jane M and McDonough, Kathleen M and Zoller, Ann C and Wehmeyer, Kenneth R},
+  journal={Ecotoxicology and environmental safety},
+  volume={134},
+  pages={95--105},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@Article{efsa2013guidance,
+  title={Guidance on tiered risk assessment for plant protection products for aquatic organisms in edge-of-field surface waters},
+  author={EFSA Panel on Plant Protection Products and their Residues (PPR)},
+  journal={EFSA Journal},
+  volume={11},
+  number={7},
+  pages={3290},
+  year={2013},
+  publisher={Wiley Online Library}
+ }
+
+  
+@Article{fitdistrplus,
+  title = {{fitdistrplus}: An {R} Package for Fitting Distributions},
+  author = {Marie Laure Delignette-Muller and Christophe Dutang},
+  journal = {Journal of Statistical Software},
+  year = {2015},
+  volume = {64},
+  number = {4},
+  pages = {1--34},
+  url = {http://www.jstatsoft.org/v64/i04/},
+}
+
+@Article{newman2000applying,
+  title={Applying species-sensitivity distributions in ecological risk assessment: assumptions of distribution type and sufficient numbers of species},
+  author={Newman, Michael C and Ownby, David R and Mezin, Laurent CA and Powell, David C and Christensen, Tyler RL and Lerberg, Scott B and Anderson, Britt-Anne},
+  journal={Environmental toxicology and chemistry},
+  volume={19},
+  number={2},
+  pages={508--515},
+  year={2000},
+  publisher={Wiley Online Library}
+}
+
+@Article{wheeler2002species,
+  title={Species sensitivity distributions: data and model choice},
+  author={Wheeler, JR and Grist, EPM and Leung, KMY and Morritt, D and Crane, M},
+  journal={Marine Pollution Bulletin},
+  volume={45},
+  number={1-12},
+  pages={192--202},
+  year={2002},
+  publisher={Elsevier}
+}
 @Manual{tibble,
   title = {tibble: Simple Data Frames},
   author = {Kirill Müller and Hadley Wickham},
