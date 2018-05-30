@@ -41,6 +41,10 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
 
+ShinySSD can be run from R using the following code:
+library(shiny)
+shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")
+
 # Acknowledgements
 
 We wish to thank the R comunity and R-Ladies for their help and support.
