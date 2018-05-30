@@ -8,6 +8,7 @@ params:
   Effect: input$Effect
   OrganismLifestage: input$OrganismLifestage
   ExposureMedia: input$ExposureMedia
+  MediaType: input$MediaType
   PesticideType: input$PesticideType
   ExposureType: input$ExposureType
   SpeciesGroup: input$SpeciesGroup
@@ -34,6 +35,12 @@ params$Chemical
 ##### Endpoint
 ```{r endpoint, echo=FALSE}
 params$Endpoint
+  
+```
+
+##### SpeciesGroup
+```{r SpeciesGroup, echo=FALSE}
+params$SpeciesGroup
   
 ```
 
@@ -67,15 +74,17 @@ params$ExposureMedia
   
 ```
 
-##### SpeciesGroup
-```{r SpeciesGroup, echo=FALSE}
-params$SpeciesGroup
+
+##### MediaType
+```{r MediaType, echo=FALSE}
+params$MediaType
   
 ```
 
+
 ## Plots
 
-```{r out, echo=FALSE, fig.cap="Goodnes of fit", out.width = '100%'}
+```{r out, echo=FALSE, fig.cap="Goodness of fit", out.width = '100%'}
 knitr::include_graphics("out.png")
 ```
 
@@ -90,7 +99,7 @@ params$outgof
   
 ```
 
-##### Hazard COncentration
+##### Hazard Concentration
 ```{r outhc5, echo=FALSE}
 params$outhc5
   
