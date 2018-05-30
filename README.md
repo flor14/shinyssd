@@ -39,6 +39,11 @@ After selecting the toxicant and species groups, the user can filter and select 
 By facilitating and streamlining toxicity data analysis and the creation of SSD curves, the user interface proposed here should be useful for environmental managers and regulators conducting ecological risk assessments and scientific research.
 
 
+ShinySSD includes a preloaded database with some toxicological data of the pesticides Cypermethrin and Glyphosate for aquatic animals extracted from ECOTOX database from the Environmental Agency of the United States (EPA).
+
+This app includes the option of download the relevant results as a .docx report.
+
+
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
 
 ShinySSD can be run from R using the following code:
