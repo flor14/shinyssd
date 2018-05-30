@@ -9,6 +9,11 @@ library(DT)
 library(ggiraph)
 library(rmarkdown)
 
+#### read preloaded database
+colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity Mean Op",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "ChemicalAnalysis", "MediaType", "Test Location", "Endpoint","Effect", "EffectMeasurement", "PesticideType",	"Values", "Units", "ExposureMedia" )		
+tbl<-read.delim("database.csv", sep=",", col.names = colnames, stringsAsFactors = FALSE)
+
+
 ######## USER INTERFASE ########
 
 ui <- navbarPage("Species Sensitivity Distribution", 
@@ -79,9 +84,6 @@ server <- function(input, output){
   #### size of the file
   options(shiny.maxRequestSize = 30*1024^2)
   
-  #### Fixed colnames
-  colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity Mean Op",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "ChemicalAnalysis", "MediaType", "Test Location", "Endpoint","Effect", "EffectMeasurement", "PesticideType",	"Values", "Units", "ExposureMedia" )		
-  
   #### Read a preloaded table or upload a new one
   tbl <- reactive ({
     inFile <- input$file1
@@ -130,13 +132,13 @@ server <- function(input, output){
   
   #### Processing the data for the geom_tile plot
   visual <-reactive({ 
-    pepa<-tbl() %>% dplyr::filter(input$ChemicalName == ChemicalName) %>%
+    visual<-tbl() %>% dplyr::filter(input$ChemicalName == ChemicalName) %>%
       group_by(SpeciesGroup, SpeciesScientificName,Endpoint, ChemicalName)  %>% summarise(n())
-    colnames(pepa)<-c("SpeciesGroup", "SpeciesScientificName", "Endpoint", "ChemicalName", "n")
-    pepo<-pepa %>% group_by(SpeciesGroup, Endpoint) %>% summarise(n()) 
-    colnames(pepo)<-c("SpeciesGroup", "Endpoint", "n")
-    pepo$Y1 <- cut(pepo$n, breaks = c(0,8,10,30,Inf), right = FALSE)
-    print(pepo)
+    colnames(visual)<-c("SpeciesGroup", "SpeciesScientificName", "Endpoint", "ChemicalName", "n")
+    vis<-visual %>% group_by(SpeciesGroup, Endpoint) %>% summarise(n()) 
+    colnames(vis)<-c("SpeciesGroup", "Endpoint", "n")
+    vis$Y1 <- cut(vis$n, breaks = c(0,8,10,30,Inf), right = FALSE)
+    print(vis)
   })
   
   #### Title
