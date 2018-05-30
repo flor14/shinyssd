@@ -1,12 +1,13 @@
 
 ---
-title: 'ShinySSD: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'
+title: 'ShinySSD: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
 tags:
   - R
   - ecotoxicological risk assessment
   - shiny app
   - toxicology
-  - environmental managment
+  - environmental managment  
+  
 authors:
   - name: María Florencia D’Andrea
     orcid: 0000-0002-0041-097X
@@ -46,7 +47,7 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 - ShinySSD can be run from R using the following code:
 
-``library(shiny)
+``library(shiny)  
 shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")``
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
