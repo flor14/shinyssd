@@ -7,13 +7,7 @@ library(tibble)
 library(actuar)
 library(DT)
 library(ggiraph)
-library(bibtex)
 library(rmarkdown)
-library(knitr)
-
-
-#write.bib(c('shiny', 'dplyr', 'ggplot2', 'fitdistrplus', 'actuar', 'tibble', 'EnvStats', 'DT', 'ggiraph', 'bibtex', 'rmarkdown'), file='references')
-
 
 ######## USER INTERFASE ########
 
@@ -32,14 +26,13 @@ ui <- navbarPage("Species Sensitivity Distribution",
                                          htmlOutput("PesticideType"),
                                          htmlOutput("ChemicalAnalysis"),
                                          htmlOutput("ExposureType"),
+                                         htmlOutput("MediaType"),
                                          htmlOutput("ExposureMedia"),
                                          htmlOutput("OrganismLifestage"),
                                          downloadButton("report", "Download Report", class = "btn-info")),#sidebarpanel
                             mainPanel(tabsetPanel(
-                              tabPanel("Visualization", h4(textOutput("chemical")),
-                                       plotOutput(outputId = "Database")), 
-                              tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"), 
-                                       h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), verbatimTextOutput(outputId = "gof")),
+                              tabPanel("Visualization", h4(textOutput("chemical")), plotOutput(outputId = "Database")), 
+                              tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"), h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), verbatimTextOutput(outputId = "gof")),
                               tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"), ggiraphOutput(outputId = "coolplot"), h4("Hazard Concentration (HC)"),textOutput(outputId ="bestfit2"), verbatimTextOutput(outputId = "hc5"), h4("Confidence Intervals (CI)"), verbatimTextOutput(outputId = "boot")))))),
                  tabPanel("Contact", h5("MAIL: dandrea.florencia@inta.gob.ar + GITHUB: flor14/paper")))
 
@@ -54,9 +47,9 @@ server <- function(input, output){
     selectizeInput('Effect', 'Effect', choices = as.character(unique(filter()$`Effect`)), selected=as.character(unique(filter()$`Effect`)), multiple = TRUE)
   })
   
- # output$MediaType <- renderUI ({
-#    selectizeInput('MediaType', 'MediaType', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
-#  })
+  output$MediaType <- renderUI ({
+    selectizeInput('MediaType', 'MediaType', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
+  })
   
   output$OrganismLifestage <- renderUI ({
     selectizeInput('OrganismLifestage', 'OrganismLifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
@@ -83,7 +76,6 @@ server <- function(input, output){
   })
   
   #### TABPanel "Database" ######
-  
   #### size of the file
   options(shiny.maxRequestSize = 30*1024^2)
   
@@ -106,29 +98,25 @@ server <- function(input, output){
   output$contents <- DT::renderDataTable({ tbl() })
   
   ##### Filtering the database
-  
-  #filter pesticide + endpoint (user election)
+  #### Filter pesticide + endpoint (user election)
   filter<- reactive ({
     
     tbl() %>% dplyr::filter(input$Endpoint == Endpoint & input$ChemicalName == ChemicalName ) })
   
-  #filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage
+  #### filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage
   filtered <- reactive ({ 
-    filt<- filter() %>% dplyr::filter(PesticideType %in% input$PesticideType  & ChemicalAnalysis %in% input$ChemicalAnalysis & ExposureType %in% input$ExposureType & SpeciesGroup %in% input$SpeciesGroup & Effect %in% input$Effect  & OrganismLifestage %in% input$OrganismLifestage & ExposureMedia %in% input$ExposureMedia) 
-     #necesito pasar a factor esta columna para usar tapply
+    filt<- filter() %>% dplyr::filter(PesticideType %in% input$PesticideType  & ChemicalAnalysis %in% input$ChemicalAnalysis & ExposureType %in% input$ExposureType & SpeciesGroup %in% input$SpeciesGroup & Effect %in% input$Effect  & OrganismLifestage %in% input$OrganismLifestage & ExposureMedia %in% input$ExposureMedia & MediaType %in% input$MediaType) 
     filt$SpeciesScientificName<-as.factor(filt$SpeciesScientificName)
-    filt
-    }) 
+    filt})
+     
   
-  #Elimino especies duplicadas haciendo la media geometrica entre las que tienen el mismo nombre
-  
+  #### When there are reported bioassays for the same species, the geometric mean is calculated
   geom <- reactive ({ 
     ta<-as.data.frame(tapply(as.numeric(filtered()$Values), filtered()$SpeciesScientificName, FUN=geoMean))
     ta <- rownames_to_column(ta, var = "rowname")
     colnames(ta)<-c("SpeciesScientificName", "Values")
     ta <- ta[order(ta$Values), ]
     ta$frac<-ppoints(ta$Values, 0.5) 
-    print(ta)
     #Quiero agregar una columna con speciesgroup para despues usarlo para graficar
     
     list<-data.frame(filtered()$SpeciesScientificName, filtered()$SpeciesGroup)
@@ -140,8 +128,7 @@ server <- function(input, output){
     ta })
   
   
-  #trato de visualizar la base de datos para el tab de Databes (cantidad de especies no repetidas)
-  
+  #### Processing the data for the geom_tile plot
   visual <-reactive({ 
     pepa<-tbl() %>% dplyr::filter(input$ChemicalName == ChemicalName) %>%
       group_by(SpeciesGroup, SpeciesScientificName,Endpoint, ChemicalName)  %>% summarise(n())
@@ -152,10 +139,10 @@ server <- function(input, output){
     print(pepo)
   })
   
-  #Title
+  #### Title
   output$chemical<-renderText({paste("Number of species by endpoint for",input$ChemicalName)})
   
-  #Plot geom_tile
+  #### Plot geom_tile
   output$Database <- renderPlot({
     
     print(ggplot(visual(), aes(x=Endpoint, y=SpeciesGroup, fill=Y1)) + geom_tile(width=0.4, height=0.35) + 
@@ -164,9 +151,8 @@ server <- function(input, output){
   })
   
   
-  
   #### TABPanel "Goodness of Fit" ######
-  #### fitdistr
+  #### fit distr
   fit_ln<-  reactive ({ fitdist(as.numeric(geom()$Values), "lnorm" )})
   fit_ll<- reactive ({ fitdist(as.numeric(geom()$Values), "llogis" )})
   fit_w<- reactive ({ fitdist(as.numeric(geom()$Values), "weibull" )})
@@ -213,9 +199,9 @@ server <- function(input, output){
       labs(x = paste("Log10 conc. of", input$ChemicalName, "(",as.character(unique(tbl()$Units)),")", sep=" "), 
            y = 'Fraction of species affected')  })
   
-  output$coolplot <- renderggiraph({ ggiraph(code = print(codeplot()), selection_type = 'none')  })
+  output$coolplot <- renderggiraph({ ggiraph(code = print(codeplot()), selection_type = 'none') })
   
-  output$bestfit2 <- renderText({ paste("Lowest AIC value:",as.character(AICS()[1,"Names"]), sep=" ")})
+  output$bestfit2 <- renderText({ paste("Lowest AIC value:", as.character(AICS()[1,"Names"]), sep=" ")})
   
   #### HC5
   hc5 <- reactive ({ 
@@ -256,7 +242,6 @@ server <- function(input, output){
   output$boot<-renderPrint({ fit_boot() })
   
   #### Download Report ######
-  
   output$report <- downloadHandler(
     filename = "report.docx",
     content = function(file) {
@@ -277,7 +262,7 @@ server <- function(input, output){
       file.copy("report.Rmd", tempReport, overwrite = TRUE)
       
       
-      ##### Generate dataframes of the outputs for the report
+      ##### Generate dataframes for the report
       dfgof<-as.array(gof())
       dfhc5<-as.data.frame(hc5())
       dfboot<-as.data.frame(fit_boot())
@@ -288,7 +273,7 @@ server <- function(input, output){
                      Endpoint= input$Endpoint, 
                      Effect=input$Effect,
                      OrganismLifestage = input$OrganismLifestage,
-                     #MediaType = input$MediaType,
+                     MediaType = input$MediaType,
                      PesticideType = input$PesticideType,
                      ExposureType = input$ExposureType,
                      ExposureMedia = input$ExposureMedia,
