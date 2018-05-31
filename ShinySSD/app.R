@@ -9,7 +9,7 @@ library(DT)
 library(ggiraph)
 library(rmarkdown)
 
-#### read preloaded database
+#### Read preloaded database
 colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity Mean Op",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "ChemicalAnalysis", "MediaType", "Test Location", "Endpoint","Effect", "EffectMeasurement", "PesticideType",	"Values", "Units", "ExposureMedia" )		
 tbl<-read.delim("database.csv", sep=",", col.names = colnames, stringsAsFactors = FALSE)
 
@@ -39,7 +39,7 @@ ui <- navbarPage("Species Sensitivity Distribution",
                               tabPanel("Visualization", h4(textOutput("chemical")), plotOutput(outputId = "Database")), 
                               tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"), h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), verbatimTextOutput(outputId = "gof")),
                               tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"), ggiraphOutput(outputId = "coolplot"), h4("Hazard Concentration (HC)"),textOutput(outputId ="bestfit2"), verbatimTextOutput(outputId = "hc5"), h4("Confidence Intervals (CI)"), verbatimTextOutput(outputId = "boot")))))),
-                 tabPanel("Contact", h5("MAIL: dandrea.florencia@inta.gob.ar + GITHUB: flor14/paper")))
+                 tabPanel("Contact", h5("MAIL: florencia.dandrea@gmail.com + GITHUB: flor14/paper/ShinySSD")))
 
 
 ############ SERVER ##############
