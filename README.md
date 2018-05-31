@@ -52,7 +52,6 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 ``` 
 library(shiny)  
 shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")
-
 ```
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
