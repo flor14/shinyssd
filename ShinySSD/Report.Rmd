@@ -8,13 +8,16 @@ params:
   Effect: input$Effect
   OrganismLifestage: input$OrganismLifestage
   ExposureMedia: input$ExposureMedia
+  AnalyticValidation: input$AnalyticValidation
   MediaType: input$MediaType
-  PesticideType: input$PesticideType
+  Chemical: input$ChemicalType
   ExposureType: input$ExposureType
   SpeciesGroup: input$SpeciesGroup
+  TestLocation: input$TestLocation
   outgof: dfgof
   outhc5: dfhc5
   outboot: dfboot
+  
 ---
 
 ```{r setup, include=FALSE}
@@ -43,10 +46,27 @@ params$Endpoint
 params$SpeciesGroup
   
 ```
+##### ChemicalType
+```{r ChemicalType, echo=FALSE}
+params$ChemicalType
+  
+```
 
 ##### Effect
 ```{r effect, echo=FALSE}
 params$Effect
+  
+```
+
+##### Analytic Validation
+```{r AnalyticValidation, echo=FALSE}
+params$AnalyticValidation
+  
+```
+
+##### Test Location
+```{r TestLocation, echo=FALSE}
+params$TestLocation
   
 ```
 
@@ -56,11 +76,7 @@ params$OrganismLifestage
   
 ```
 
-##### PesticideType
-```{r PesticideType, echo=FALSE}
-params$PesticideType
-  
-```
+
 
 ##### ExposureType
 ```{r ExposureType, echo=FALSE}
