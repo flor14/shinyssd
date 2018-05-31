@@ -304,7 +304,7 @@ server <- function(input, output, session){
                      SpeciesGroup = input$SpeciesGroup,
                      ChemicalType = input$ChemicalType,
                      ExposureType = input$ExposureType,
-                     TestLocation = input$TestLocation
+                     TestLocation = input$TestLocation,
                      ExposureMedia = input$ExposureMedia,
                      MediaType = input$MediaType,
                      OrganismLifestage = input$OrganismLifestage,
