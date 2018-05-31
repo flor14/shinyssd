@@ -190,12 +190,16 @@ server <- function(input, output){
   
   #### TABPanel "HC5 and Plot" ######
   #### Plot
+  d <- data.frame(value = as.numeric(c(0.01, 0.05,0.1)), 
+                    name = c("1%", "5%", "10%"))
+   
+     d$name <- factor(d$name, levels = c("1%", "5%", "10%"))
+  
+  
   codeplot<- reactive({ ggplot(geom()) +
       geom_point_interactive(aes(x = Values, y = frac, color= SpeciesGroup, tooltip=SpeciesScientificName), size = 1.5) +
       theme_bw() + 
-      geom_hline(aes(yintercept = 0.01, linetype = "1%"), color="black")+
-      geom_hline(aes(yintercept = 0.05, linetype = "5%"), color="black")+
-      geom_hline(aes(yintercept = 0.1, linetype = "10%"), color="black")+
+      geom_hline(data=d, aes(yintercept = value , linetype = name), color="black")+
       scale_linetype_manual(values=c(2,4,3), name = "HC")+
       scale_x_log10() +
       labs(x = paste("Log10 conc. of", input$ChemicalName, "(",as.character(unique(tbl()$Units)),")", sep=" "), 
