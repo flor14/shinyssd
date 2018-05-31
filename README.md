@@ -43,7 +43,7 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 - ShinySSD includes a preloaded database with aquatic toxicological data for the pesticides Cypermethrin and Glyphosate. This data was extracted of the ECOTOX database of the Environmental Agency of the United States (EPA). An external separated by commas file (.csv) could be uploaded by the user according to the format of the ``template.csv`` file attached in the repo. 
 
-- There is a warning alert message if you are entering the data always in the same units, to avoid conflictive results.
+- There is a warning alert message if you are entering data with different units, to avoid conflictive results.
 
 - ShinySSD includes the option of download the relevant results as a .docx report.
 
