@@ -3,14 +3,13 @@ library(dplyr)
 library(ggplot2)
 library(fitdistrplus)
 library(EnvStats)
-library(tibble)
 library(actuar)
 library(DT)
 library(ggiraph)
 library(rmarkdown)
 
 #### Read preloaded database
-colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "AnalyticValidation", "MediaType", "Test Location", "Endpoint", "Effect", "EffectMeasurement", "ChemicalType",	"Values", "Units", "ExposureMedia" )		
+colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "AnalyticValidation", "MediaType", "TestLocation", "Endpoint", "Effect", "EffectMeasurement", "ChemicalType",	"Values", "Units", "ExposureMedia" )		
 tbl<-read.delim("database.csv", sep=",", col.names = colnames, stringsAsFactors = FALSE)
 
 
@@ -30,11 +29,12 @@ ui <- navbarPage("Species Sensitivity Distribution",
                                          h4("Remove data"),
                                          htmlOutput("ChemicalType"),
                                          htmlOutput("AnalyticValidation"),
+                                         htmlOutput("TestLocation"),
                                          htmlOutput("ExposureType"),
-                                         htmlOutput("MediaType"),
                                          htmlOutput("ExposureMedia"),
+                                         htmlOutput("MediaType"),
                                          htmlOutput("OrganismLifestage"),
-                                         downloadButton("report", "Download Report", class = "btn-info")),#sidebarpanel
+                                         downloadButton("report", "Download Report", class = "btn-info")),
                             mainPanel(tabsetPanel(
                               tabPanel("Visualization", h4(textOutput("chemical")), plotOutput(outputId = "Database")), 
                               tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"), h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), verbatimTextOutput(outputId = "gof")),
@@ -52,13 +52,11 @@ server <- function(input, output, session){
     selectizeInput('Effect', 'Effect', choices = as.character(unique(filter()$`Effect`)), selected=as.character(unique(filter()$`Effect`)), multiple = TRUE)
   })
   
-  output$MediaType <- renderUI ({
-    selectizeInput('MediaType', 'Media Type', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
+  output$SpeciesGroup <- renderUI({  
+    selectizeInput(inputId ="SpeciesGroup", "Species Group", choices = as.character(unique(filter()$`SpeciesGroup`)), selected = as.character(unique(filter()$`SpeciesGroup`)) , multiple = TRUE)
   })
-  
-  output$OrganismLifestage <- renderUI ({
-    selectizeInput('OrganismLifestage', 'Organism Lifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
-  })
+ 
+ 
   
   output$ChemicalType <- renderUI ({
     selectizeInput('ChemicalType', 'Chemical Type', choices = as.character(unique(filter()$`ChemicalType`)), selected=as.character(unique(filter()$`ChemicalType`)), multiple = TRUE)
@@ -66,6 +64,10 @@ server <- function(input, output, session){
   
   output$AnalyticValidation <- renderUI({ 
     selectizeInput("AnalyticValidation", "Analytic Validation", choices= as.character(unique(filter()$`AnalyticValidation`)), selected=as.character(unique(filter()$`AnalyticValidation`)),  multiple = TRUE)
+  })
+  
+   output$TestLocation <- renderUI({ 
+    selectizeInput("TestLocation", "Test Location", choices= as.character(unique(filter()$`TestLocation`)), selected=as.character(unique(filter()$`TestLocation`)),  multiple = TRUE)
   })
   
   output$ExposureType <- renderUI({  
@@ -76,8 +78,12 @@ server <- function(input, output, session){
     selectizeInput("ExposureMedia", "Exposure Media", choices= as.character(unique(filter()$`ExposureMedia`)), selected=as.character(unique(filter()$`ExposureMedia`)), multiple = TRUE)
   })
   
-  output$SpeciesGroup <- renderUI({  
-    selectizeInput(inputId ="SpeciesGroup", "Species Group", choices = as.character(unique(filter()$`SpeciesGroup`)), selected = as.character(unique(filter()$`SpeciesGroup`)) , multiple = TRUE)
+   output$MediaType <- renderUI ({
+    selectizeInput('MediaType', 'Media Type', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
+  })
+    
+   output$OrganismLifestage <- renderUI ({
+    selectizeInput('OrganismLifestage', 'Organism Lifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
   })
   
   #### change choices and selections of Select Input when a file is uploaded
