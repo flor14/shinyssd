@@ -44,7 +44,7 @@ ui <- navbarPage("Species Sensitivity Distribution",
 
 ############ SERVER ##############
 
-server <- function(input, output){
+server <- function(input, output, session){
   
   #### UI selectize paramenters #####
   
