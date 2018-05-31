@@ -78,6 +78,13 @@
   publisher={Wiley Online Library}
 }
 
+@Book{posthuma2001,
+  title={Species sensitivity distributions in ecotoxicology},
+  author={Posthuma, Leo and Suter II, Glenn W and Traas, Theo P},
+  year={2001},
+  publisher={CRC press}
+}
+
 @Article{wheeler2002,
   title={Species sensitivity distributions: data and model choice},
   author={Wheeler, JR and Grist, EPM and Leung, KMY and Morritt, D and Crane, M},
