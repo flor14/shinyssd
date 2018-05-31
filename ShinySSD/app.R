@@ -10,7 +10,7 @@ library(ggiraph)
 library(rmarkdown)
 
 #### Read preloaded database
-colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity Mean Op",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "ChemicalAnalysis", "MediaType", "Test Location", "Endpoint","Effect", "EffectMeasurement", "PesticideType",	"Values", "Units", "ExposureMedia" )		
+colnames<-c("Order", "CASNumber", "ChemicalName",  "Chemical Purity",  "SpeciesScientificName", "SpeciesGroup",  "OrganismLifestage",	"ExposureType", "AnalyticValidation", "MediaType", "Test Location", "Endpoint", "Effect", "EffectMeasurement", "ChemicalType",	"Values", "Units", "ExposureMedia" )		
 tbl<-read.delim("database.csv", sep=",", col.names = colnames, stringsAsFactors = FALSE)
 
 
@@ -28,8 +28,8 @@ ui <- navbarPage("Species Sensitivity Distribution",
                                          htmlOutput("Effect"),
                                          tags$hr(style="border-color: lightblue;"),
                                          h4("Remove data"),
-                                         htmlOutput("PesticideType"),
-                                         htmlOutput("ChemicalAnalysis"),
+                                         htmlOutput("ChemicalType"),
+                                         htmlOutput("AnalyticValidation"),
                                          htmlOutput("ExposureType"),
                                          htmlOutput("MediaType"),
                                          htmlOutput("ExposureMedia"),
@@ -60,12 +60,12 @@ server <- function(input, output, session){
     selectizeInput('OrganismLifestage', 'OrganismLifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
   })
   
-  output$PesticideType <- renderUI ({
-    selectizeInput('PesticideType', 'PesticideType', choices = as.character(unique(filter()$`PesticideType`)), selected=as.character(unique(filter()$`PesticideType`)), multiple = TRUE)
+  output$ChemicalType <- renderUI ({
+    selectizeInput('ChemicalType', 'ChemicalType', choices = as.character(unique(filter()$`ChemicalType`)), selected=as.character(unique(filter()$`ChemicalType`)), multiple = TRUE)
   })
   
-  output$ChemicalAnalysis <- renderUI({ 
-    selectizeInput("ChemicalAnalysis", "ChemicalAnalysis", choices= as.character(unique(filter()$`ChemicalAnalysis`)), selected=as.character(unique(filter()$`ChemicalAnalysis`)),  multiple = TRUE)
+  output$AnalyticValidation <- renderUI({ 
+    selectizeInput("AnalyticValidation", "AnalyticValidation", choices= as.character(unique(filter()$`AnalyticValidation`)), selected=as.character(unique(filter()$`AnalyticValidation`)),  multiple = TRUE)
   })
   
   output$ExposureType <- renderUI({  
@@ -123,7 +123,7 @@ server <- function(input, output, session){
   
   #### filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage
   filtered <- reactive ({ 
-    filt<- filter() %>% dplyr::filter(PesticideType %in% input$PesticideType  & ChemicalAnalysis %in% input$ChemicalAnalysis & ExposureType %in% input$ExposureType & SpeciesGroup %in% input$SpeciesGroup & Effect %in% input$Effect  & OrganismLifestage %in% input$OrganismLifestage & ExposureMedia %in% input$ExposureMedia & MediaType %in% input$MediaType) 
+    filt<- filter() %>% dplyr::filter(ChemicalType %in% input$ChemicalType  & AnalyticValidation %in% input$AnalyticValidation & ExposureType %in% input$ExposureType & SpeciesGroup %in% input$SpeciesGroup & Effect %in% input$Effect  & OrganismLifestage %in% input$OrganismLifestage & ExposureMedia %in% input$ExposureMedia & MediaType %in% input$MediaType) 
     filt$SpeciesScientificName<-as.factor(filt$SpeciesScientificName)
     filt})
      
@@ -296,7 +296,7 @@ server <- function(input, output, session){
                      Effect=input$Effect,
                      OrganismLifestage = input$OrganismLifestage,
                      MediaType = input$MediaType,
-                     PesticideType = input$PesticideType,
+                     ChemicalType = input$ChemicalType,
                      ExposureType = input$ExposureType,
                      ExposureMedia = input$ExposureMedia,
                      SpeciesGroup = input$SpeciesGroup,
