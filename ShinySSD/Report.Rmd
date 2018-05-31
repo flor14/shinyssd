@@ -28,7 +28,7 @@ knitr::opts_chunk$set(comment = NA)
 ```
 
 ## Input parameters
-##### chemical
+##### Chemical Name
 
 ```{r chemical}
 params$Chemical
