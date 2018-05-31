@@ -301,12 +301,13 @@ server <- function(input, output, session){
       params <- list(Chemical = input$ChemicalName,
                      Endpoint= input$Endpoint, 
                      Effect=input$Effect,
-                     OrganismLifestage = input$OrganismLifestage,
-                     MediaType = input$MediaType,
+                     SpeciesGroup = input$SpeciesGroup,
                      ChemicalType = input$ChemicalType,
                      ExposureType = input$ExposureType,
+                     TestLocation = input$TestLocation
                      ExposureMedia = input$ExposureMedia,
-                     SpeciesGroup = input$SpeciesGroup,
+                     MediaType = input$MediaType,
+                     OrganismLifestage = input$OrganismLifestage,
                      outgof= dfgof,
                      outhc5= dfhc5,
                      outboot= dfboot)
