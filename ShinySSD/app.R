@@ -53,31 +53,31 @@ server <- function(input, output, session){
   })
   
   output$MediaType <- renderUI ({
-    selectizeInput('MediaType', 'MediaType', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
+    selectizeInput('MediaType', 'Media Type', choices = as.character(unique(filter()$`MediaType`)), selected=as.character(unique(filter()$`MediaType`)), multiple = TRUE)
   })
   
   output$OrganismLifestage <- renderUI ({
-    selectizeInput('OrganismLifestage', 'OrganismLifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
+    selectizeInput('OrganismLifestage', 'Organism Lifestage', choices = as.character(unique(filter()$`OrganismLifestage`)), selected=as.character(unique(filter()$`OrganismLifestage`)), multiple = TRUE)
   })
   
   output$ChemicalType <- renderUI ({
-    selectizeInput('ChemicalType', 'ChemicalType', choices = as.character(unique(filter()$`ChemicalType`)), selected=as.character(unique(filter()$`ChemicalType`)), multiple = TRUE)
+    selectizeInput('ChemicalType', 'Chemical Type', choices = as.character(unique(filter()$`ChemicalType`)), selected=as.character(unique(filter()$`ChemicalType`)), multiple = TRUE)
   })
   
   output$AnalyticValidation <- renderUI({ 
-    selectizeInput("AnalyticValidation", "AnalyticValidation", choices= as.character(unique(filter()$`AnalyticValidation`)), selected=as.character(unique(filter()$`AnalyticValidation`)),  multiple = TRUE)
+    selectizeInput("AnalyticValidation", "Analytic Validation", choices= as.character(unique(filter()$`AnalyticValidation`)), selected=as.character(unique(filter()$`AnalyticValidation`)),  multiple = TRUE)
   })
   
   output$ExposureType <- renderUI({  
-    selectizeInput("ExposureType", "ExposureType", choices= as.character(unique(filter()$`ExposureType`)), selected=as.character(unique(filter()$`ExposureType`)), multiple = TRUE)
+    selectizeInput("ExposureType", "Exposure Type", choices= as.character(unique(filter()$`ExposureType`)), selected=as.character(unique(filter()$`ExposureType`)), multiple = TRUE)
   })
   
   output$ExposureMedia <- renderUI({  
-    selectizeInput("ExposureMedia", "ExposureMedia", choices= as.character(unique(filter()$`ExposureMedia`)), selected=as.character(unique(filter()$`ExposureMedia`)), multiple = TRUE)
+    selectizeInput("ExposureMedia", "Exposure Media", choices= as.character(unique(filter()$`ExposureMedia`)), selected=as.character(unique(filter()$`ExposureMedia`)), multiple = TRUE)
   })
   
   output$SpeciesGroup <- renderUI({  
-    selectizeInput(inputId ="SpeciesGroup", "SpeciesGroup", choices = as.character(unique(filter()$`SpeciesGroup`)), selected = as.character(unique(filter()$`SpeciesGroup`)) , multiple = TRUE)
+    selectizeInput(inputId ="SpeciesGroup", "Species Group", choices = as.character(unique(filter()$`SpeciesGroup`)), selected = as.character(unique(filter()$`SpeciesGroup`)) , multiple = TRUE)
   })
   
   #### change choices and selections of Select Input when a file is uploaded
