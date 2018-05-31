@@ -22,9 +22,9 @@ ui <- navbarPage("Species Sensitivity Distribution",
                  tabPanel("SSD",
                           sidebarLayout(
                             sidebarPanel(h4("Define SSD parameters"),
-                                         selectInput(inputId ="ChemicalName", "Chemical Name", choices = as.character(unique(tbl$ChemicalName)), selected = "Cypermethrin",  multiple = FALSE, selectize = TRUE, width = NULL, size = NULL),
+                                         selectInput(inputId ="ChemicalName", "Chemical Name", ""),
                                          htmlOutput("SpeciesGroup"),
-                                         selectInput(inputId ="Endpoint", "Endpoint", choices = as.character(unique(tbl$Endpoint)), selected = "LC50" , multiple = FALSE, selectize = TRUE, width = NULL, size = NULL), 
+                                         selectInput(inputId ="Endpoint", "Endpoint", ""), 
                                          htmlOutput("Effect"),
                                          tags$hr(style="border-color: lightblue;"),
                                          h4("Remove data"),
@@ -78,6 +78,22 @@ server <- function(input, output){
   
   output$SpeciesGroup <- renderUI({  
     selectizeInput(inputId ="SpeciesGroup", "SpeciesGroup", choices = as.character(unique(filter()$`SpeciesGroup`)), selected = as.character(unique(filter()$`SpeciesGroup`)) , multiple = TRUE)
+  })
+  
+  #### change choices and selections of Select Input when a file is uploaded
+  
+  observe({
+    updateSelectInput(session, "ChemicalName", 
+                      label = "ChemicalName",
+                      choices = tbl()$ChemicalName,
+                      selected = tbl()$ChemicalName[1])
+  })
+  
+  observe({
+    updateSelectInput(session, "Endpoint", 
+                      label = "Endpoint",
+                      choices = tbl()$Endpoint,
+                      selected = tbl()$Endpoint[1])
   })
   
   #### TABPanel "Database" ######
