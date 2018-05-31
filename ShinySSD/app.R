@@ -256,11 +256,12 @@ server <- function(input, output, session){
     bde[,"Names"] <-c("log-normal","", "log-logistic","", "weibull","", "pareto", "")
     bde<-bde[,c("Names", "CI","p=0.01", "p=0.05", "p=0.1" )]
     colnames(bde)<-c("Names", "CI","HC1%","HC5%","HC10%")
+    rownames(bde)<-NULL
     print(bde)
     
   }) 
   
-  #### CI 95%
+  #### CI 
   output$boot<-renderPrint({ fit_boot() })
   
   #### Download Report ######
@@ -290,7 +291,7 @@ server <- function(input, output, session){
       dfboot<-as.data.frame(fit_boot())
       
       
-      ##### Set up parameters to pass to Rmd document
+      ##### Set up parameters for Rmd document
       params <- list(Chemical = input$ChemicalName,
                      Endpoint= input$Endpoint, 
                      Effect=input$Effect,
