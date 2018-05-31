@@ -5,6 +5,7 @@ library(fitdistrplus)
 library(EnvStats)
 library(actuar)
 library(DT)
+library(tibble)
 library(ggiraph)
 library(rmarkdown)
 
@@ -37,8 +38,8 @@ ui <- navbarPage("Species Sensitivity Distribution",
                                          downloadButton("report", "Download Report", class = "btn-info")),
                             mainPanel(tabsetPanel(
                               tabPanel("Visualization", h4(textOutput("chemical")), plotOutput(outputId = "Database")), 
-                              tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"), h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), verbatimTextOutput(outputId = "gof"), h6("For the correct interpretation of this extended results, the reading of the fitdistrplus package manual is recommended")),
-                              tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"), ggiraphOutput(outputId = "coolplot"), h4("Hazard Concentration (HC)"),textOutput(outputId ="bestfit2"), verbatimTextOutput(outputId = "hc5"), h4("Confidence Intervals (CI)"), verbatimTextOutput(outputId = "boot")))))),
+                              tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof"), h4("Goodness of Fit"), textOutput(outputId ="bestfit"),hr(), h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"),hr(), verbatimTextOutput(outputId = "gof"), h6("For the correct interpretation of this extended results, the reading of the fitdistrplus package manual is recommended")),
+                              tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"), ggiraphOutput(outputId = "coolplot"),hr(), h4("Hazard Concentration (HC)"),textOutput(outputId ="bestfit2"), verbatimTextOutput(outputId = "hc5"),hr(), h4("Confidence Intervals (CI)"), verbatimTextOutput(outputId = "boot")))))),
                  tabPanel("Contact", h5("MAIL: florencia.dandrea@gmail.com + GITHUB: flor14/paper/ShinySSD")))
 
 
@@ -99,7 +100,7 @@ server <- function(input, output, session){
     updateSelectInput(session, "Endpoint", 
                       label = "Endpoint",
                       choices = tbl()$Endpoint,
-                      selected = tbl()$Endpoint[1])
+                      selected = tbl()$Endpoint[length(tbl()$Endpoint)])
   })
   
   #### TABPanel "Database" ######
