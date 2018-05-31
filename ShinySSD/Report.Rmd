@@ -10,7 +10,7 @@ params:
   ExposureMedia: input$ExposureMedia
   AnalyticValidation: input$AnalyticValidation
   MediaType: input$MediaType
-  Chemical: input$ChemicalType
+  ChemicalType: input$ChemicalType
   ExposureType: input$ExposureType
   SpeciesGroup: input$SpeciesGroup
   TestLocation: input$TestLocation
