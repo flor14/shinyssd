@@ -23,7 +23,7 @@ affiliations:
    index: 2
 
 date: May 29, 2018  
-bibliography: references.bib
+bibliography: paper.bib
 
 ---
 
