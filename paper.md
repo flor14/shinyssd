@@ -11,10 +11,10 @@ tags:
 authors:
   - name: María Florencia D’Andrea
     orcid: 0000-0002-0041-097X
-    affiliation: 1,2
+    affiliation: "1,2"
   - name: Julie Céline Brodeur
     orcid: 0000-0001-5408-6645
-    affiliation: 1,2
+    affiliation: "1,2"
 
 affiliations:
  - name: Consejo de Investigaciones Científicas y Técnicas (CONICET)
