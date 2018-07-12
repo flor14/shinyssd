@@ -58,7 +58,7 @@ The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI
 
 # Acknowledgements
 
-We wish to thank the R comunity and R-Ladies for their help and support.
+We wish to thank the R community and R-Ladies for their help and support.
  
 # References
 
