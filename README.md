@@ -72,7 +72,7 @@ Seek support:
 
 # Acknowledgements
 
-We wish to thank the R comunity, R-Ladies and Las de Sistemas for their help and support.
+We wish to thank the R community, R-Ladies and Las de Sistemas for their help and support.
  
 # References
 
