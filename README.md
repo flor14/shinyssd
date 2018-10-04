@@ -56,9 +56,23 @@ shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
 
+# Community guidelines
+
+Report Issues:
+
+- Questions, feedback, bug reports: please open an issue in the issue tracker of the project or contact the repository owner by email, whichever you feel appropriate.
+
+Contribution to the software:
+
+- Contribution to the software: please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
+
+Seek support:
+
+-Contact: florencia.dandrea@gmail.com
+
 # Acknowledgements
 
-We wish to thank the R comunity and R-Ladies for their help and support.
+We wish to thank the R comunity, R-Ladies and Las de Sistemas for their help and support.
  
 # References
 
