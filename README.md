@@ -68,7 +68,7 @@ Contribution to the software:
 
 Seek support:
 
--Contact: florencia.dandrea@gmail.com
+- Contact: florencia.dandrea@gmail.com
 
 # Acknowledgements
 
