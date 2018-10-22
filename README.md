@@ -51,7 +51,7 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 ``` 
 library(shiny)  
-shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")
+shiny::runGitHub("shinyssd", "flor14")
 ```
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
@@ -60,15 +60,11 @@ The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI
 
 Report Issues:
 
-- Questions, feedback, bug reports: please open an issue in the issue tracker of the project or contact the repository owner by email, whichever you feel appropriate.
+- Questions, feedback, bug reports: please open an issue in the issue tracker of the project [here](https://github.com/flor14/shinyssd/issues).
 
 Contribution to the software:
 
-- Contribution to the software: please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
-
-Seek support:
-
-- Contact: florencia.dandrea@gmail.com
+- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
 
 # Acknowledgements
 
