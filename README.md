@@ -47,7 +47,9 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 - ShinySSD includes the option of download the relevant results as a .docx report.
 
-- ShinySSD can be run from R using the following code:
+- ShinySSD is optimized for browser use.
+
+- The app can be run from R using the following code:
 
 ``` 
 library(shiny)  
