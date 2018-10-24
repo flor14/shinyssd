@@ -11,7 +11,8 @@ library(rmarkdown)
 
 # Read preloaded database --------------------------------
 colnames <- c("order", "cas_number", "chem_name",  "chem_purity",  "sps_sc_name", "sps_group", "org_lifestage",	"exp_type",
-              "analytic_validation", "media_type", "test_location", "endpoint", "effect", "effect_measurement", "chem_type",	"values", "units", "exposure_media")
+              "analytic_validation", "media_type", "test_location", "endpoint", "effect", "effect_measurement", "chem_type",
+              "values", "units", "exposure_media")
 
 tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFactors = FALSE)
 
@@ -129,7 +130,7 @@ server <- function(input, output, session){
         return(tbl <- read.delim(in_file$datapath, sep = ",",  col.names = colnames, stringsAsFactors = FALSE))}
   })
  
-  # Alertunits ---------------------------------------------
+  # Alertunits 
   
   textunits <- reactive({
     if(!length(unique(tbl()$units)) == 1){print("Check!Different units in the database")} else {
@@ -140,7 +141,7 @@ server <- function(input, output, session){
     paste("Database:", textunits())
   })
  
-  # Table ---------------------------------------------------
+  # Table 
   
   output$contents <- DT::renderDataTable({
     tbl()
@@ -165,24 +166,23 @@ server <- function(input, output, session){
     filt
   })
 
-# When there are reported bioassays for the same species, the geometric mean is calculated 
- geom <- reactive({
-    ta <- as.data.frame(tapply(as.numeric(filtered()$values), filtered()$sps_sc_name, FUN = geoMean))
-    ta <- tibble::rownames_to_column(ta, var = "rowname")
-    colnames(ta) <- c("sps_sc_name", "values")
-    ta <- ta[order(ta$values), ]
-    ta$frac <- ppoints(ta$values, 0.5)
-    # Quiero agregar una columna con sps_group para despues usarlo para graficar
-
-    list <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
-    colnames(list) <- c("sps_sc_name", "sps_group")
-    ul <- list %>%
-      group_by(sps_sc_name, sps_group) %>%
-      summarise()
-    colnames(ul) <- c("sps_sc_name", "sps_group")
-    ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
-    colnames(ta) <- c("sps_sc_name", "sps_group", "values", "frac")
-    ta })
+  # When there are reported bioassays for the same species, the geometric mean is calculated 
+  geom <- reactive({
+     ta <- as.data.frame(tapply(as.numeric(filtered()$values), filtered()$sps_sc_name, FUN = geoMean))
+     ta <- tibble::rownames_to_column(ta, var = "rowname")
+     colnames(ta) <- c("sps_sc_name", "values")
+     ta <- ta[order(ta$values), ]
+     ta$frac <- ppoints(ta$values, 0.5)
+    
+  lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
+     colnames(lista) <- c("sps_sc_name", "sps_group")
+     ul <- list %>%
+       group_by(sps_sc_name, sps_group) %>%
+       summarise()
+     colnames(ul) <- c("sps_sc_name", "sps_group")
+     ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
+     colnames(ta) <- c("sps_sc_name", "sps_group", "values", "frac")
+     ta })
 
   
   # Processing the data for the geom_tile plot --------------
