@@ -1,6 +1,6 @@
 
 ---
-# '*shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
+# *shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
 ---
 
 ## Summary
@@ -52,4 +52,4 @@ We wish to thank the R community, R-Ladies and Las de Sistemas for their help an
  
 ## How to use shinyssd? / ¿Cómo usar shinyssd? (in Spanish)
 
-![imagen_shiny](https://raw.githubusercontent.com/flor14/shinyssd/shinyssd/imagen_shiny.png)
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny.png)
