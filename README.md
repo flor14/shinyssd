@@ -74,6 +74,6 @@ Contribution to the software:
 
 We wish to thank the R community, R-Ladies and Las de Sistemas for their help and support.
  
-# References
+# How to use? / ¿Cómo usar shinyssd? (in Spanish)
 
-
+![alt text](https://raw.githubusercontent.com/flor14/shinyssd/imagen_shiny.png)
