@@ -52,8 +52,10 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 - The app can be run from R using the following code:
 
 ``` 
-library(shiny)  
-shiny::runGitHub("shinyssd", "flor14", subdir = "shinyssd"))
+library(devtools)
+devtools::install_github("flor14/shinyssd", subdir = "shinyssd")
+library(shinyssd)
+shinyssd::shinyssd_run()
 ```
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
