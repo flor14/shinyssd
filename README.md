@@ -1,30 +1,6 @@
 
 ---
-title: 'ShinySSD: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
-tags:
-  - R
-  - ecotoxicological risk assessment
-  - shiny app
-  - toxicology
-  - environmental managment  
-  
-authors:
-  - name: María Florencia D’Andrea
-    orcid: 0000-0002-0041-097X
-    affiliation: "1,2"
-  - name: Julie Céline Brodeur
-    orcid: 0000-0001-5408-6645
-    affiliation: "1,2"
-
-affiliations:
- - name: Consejo de Investigaciones Científicas y Técnicas (CONICET)
-   index: 1
- - name: Instituto Nacional de Tecnología Agropecuaria (INTA)
-   index: 2
-
-date: May 29, 2018  
-bibliography: paper.bib
-
+'*shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
 ---
 
 # Summary
@@ -76,4 +52,4 @@ We wish to thank the R community, R-Ladies and Las de Sistemas for their help an
  
 # How to use? / ¿Cómo usar shinyssd? (in Spanish)
 
-![alt text](https://raw.githubusercontent.com/flor14/shinyssd/imagen_shiny.png)
+![alt text](https://raw.githubusercontent.com/flor14/shinyssd/shinyssd/imagen_shiny.png)
