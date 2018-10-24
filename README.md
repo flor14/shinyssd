@@ -48,7 +48,7 @@ Contribution to the software:
 
 ## Acknowledgements
 
-We wish to thank the R community, R-Ladies and Las de Sistemas for their help and support.
+We wish to thank the R community and R-Ladies or their help and support.
  
 ## How to use shinyssd? / ¿Cómo usar shinyssd? (in Spanish)
 
