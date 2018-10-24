@@ -1,1 +1,1 @@
-","CAS.Number","Chemical.Name","Chemical.Purity","Species.Scientific.Name","Species.Group","Organism.Lifestage","Exposure.Type","Analytic.Validation","Media.Type","Test.Location","Endpoint","Effect","Effect.Measurement","Chemical.Type","Mean.Value","Units","Experimental.Media""
+order, cas_number, chem_name,  chem_purity,  sps_sc_name, sps_group, org_lifestage, exp_type, analytic_validation, media_type, test_location, endpoint, effect, effect_measurement, chem_type, values, units, exposure_media
