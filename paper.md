@@ -1,6 +1,6 @@
 
 ---
-title: 'ShinySSD: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
+title: 'shinyssd: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
 tags:
   - R
   - ecotoxicological risk assessment
