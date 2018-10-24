@@ -47,22 +47,32 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 - ShinySSD includes the option of download the relevant results as a .docx report.
 
-- ShinySSD can be run from R using the following code:
+- ShinySSD is optimized for browser use.
+
+- The app can be run from R using the following code:
 
 ``` 
 library(shiny)  
-shiny::runGitHub("paper", "flor14", subdir = "ShinySSD")
+shiny::runGitHub("shinyssd", "flor14")
 ```
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
 
+# Community guidelines
+
+Report Issues:
+
+- Questions, feedback, bug reports: please open an issue in the issue tracker of the project [here](https://github.com/flor14/shinyssd/issues).
+
+Contribution to the software:
+
+- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
+
 # Acknowledgements
 
-We wish to thank the R community and R-Ladies for their help and support.
+We wish to thank the R community, R-Ladies and Las de Sistemas for their help and support.
  
 # References
-
-
 
 
 
