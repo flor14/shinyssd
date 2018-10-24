@@ -1,0 +1,32 @@
+Package: shinyssd
+Type: Package
+Title: species sensitivity distributions for ecotoxicological risk assessment
+Version: 0.1.0
+Date: 2018-10-23
+Authors@R: person("D'Andrea", "Maria Florencia", email = "florencia.dandrea@gmail.com",  role = c("aut", "cre"))
+Author: Maria Florencia D'Andrea
+Maintainer: Maria Florencia D'Andrea <florencia.dandrea@gmail.com>
+Description: The shinyssd web application is a versatile and easy to use tool that serves to simultaneously model the
+    species sensitivity distributions (SSD) curve of a user-defined toxicity dataset based on four different statistical
+    distribution models (log-normal, log-logistic, Weibull, Pareto). shinyssd directly calculates three estimators 
+    Hazard Concentration 1 percent (HC1), 5 percent (HC5) and 10 percent (HC10) associated to the four distribution models
+    together with its confidence intervals, allowing the user to select the statistical distribution and associated HC
+    values that best adjust the dataset.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    shiny,
+    dplyr,
+    ggplot2,
+    fitdistrplus,
+    EnvStats,
+    actuar,
+    DT,
+    tibble,
+    ggiraph,
+    rmarkdown
+RoxygenNote: 6.1.0
+Suggests: 
+    testthat,
+    shinytest

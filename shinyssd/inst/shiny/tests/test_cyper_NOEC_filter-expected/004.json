@@ -1,0 +1,5 @@
+{
+  "output": {
+    "hc5": "              HC1%  HC5% HC10%\nlog-normal   0.000 0.001 0.003\nlog-logistic 0.000 0.000 0.003\nweibull      0.000 0.000 0.000\npareto       0.001 0.004 0.009"
+  }
+}

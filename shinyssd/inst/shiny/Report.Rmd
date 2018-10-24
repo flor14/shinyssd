@@ -1,0 +1,127 @@
+---
+title: "report"
+author: "ShinySSD v.1.0.0"
+output: word_document 
+params:
+  chem_name: input$chem_name
+  endpoint: input$endpoint
+  effect: input$effect
+  org_lifestage: input$org_lifestage
+  exposure_media: input$exposure_media
+  analytic_validation: input$analytic_validation
+  media_type: input$media_type
+  chem_type: input$chem_type
+  exp_type: input$exp_type
+  sps_group: input$sps_group
+  test_location: input$test_location
+  outgof: dfgof
+  outhc5: dfhc5
+  outboot: dfboot
+  
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(comment = NA)
+
+```
+
+## Input parameters
+##### Chemical Name
+
+```{r chem_name}
+params$chem_name
+
+```
+
+##### Endpoint
+```{r endpoint, echo=FALSE}
+params$endpoint
+  
+```
+
+##### Species group
+```{r sps_group, echo=FALSE}
+params$sps_group
+  
+```
+##### Chemical Type
+```{r chem_type, echo=FALSE}
+params$chem_type
+  
+```
+
+##### Effect
+```{r effect, echo=FALSE}
+params$effect
+  
+```
+
+##### Analytic Validation
+```{r analytic_validation, echo=FALSE}
+params$analytic_validation
+  
+```
+
+##### Test Location
+```{r test_location, echo=FALSE}
+params$test_location
+  
+```
+
+##### Organism lifestage
+```{r org_lifestage, echo=FALSE}
+params$org_lifestage
+  
+```
+
+##### Exposure Type
+```{r exp_type, echo=FALSE}
+params$exp_type
+  
+```
+
+##### Exposure media
+```{r exposure_media, echo=FALSE}
+params$exposure_media
+  
+```
+
+
+##### Media type
+```{r media_type, echo=FALSE}
+params$media_type
+  
+```
+
+
+## Plots
+
+```{r out, echo=FALSE, fig.cap="Fig 1. Goodness of fit", out.width = '100%'}
+knitr::include_graphics("out.png")
+```
+
+```{r out2, echo=FALSE, fig.cap="Fig 2. Species Sensitivity Distribution", out.width = '100%'}
+knitr::include_graphics("out2.png")
+```
+
+
+##### Goodness of fit
+```{r dfgof, echo=FALSE}
+params$outgof
+  
+```
+
+##### Hazard Concentration
+```{r outhc5, echo=FALSE}
+params$outhc5
+  
+```
+
+##### Confidence Intervals
+```{r outboot, echo=FALSE}
+params$outboot
+  
+```
+  
