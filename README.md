@@ -1,9 +1,9 @@
 
 ---
-'*shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
+# '*shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment'  
 ---
 
-# Summary
+## Summary
 
 Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration HC5, that is, the concentration at which 5% of the considered species are affected. The HC5 is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
 
@@ -15,7 +15,7 @@ After selecting the toxicant and species groups, the user can filter and select 
 
 By facilitating and streamlining toxicity data analysis and the creation of SSD curves, the user interface proposed here should be useful for environmental managers and regulators conducting ecological risk assessments and scientific research.
 
-# Information for Users
+## Information for Users
 
 - ShinySSD includes a preloaded database with aquatic toxicological data for the pesticides Cypermethrin and Glyphosate. This data was extracted of the ECOTOX database of the Environmental Agency of the United States (EPA) [link](https://cfpub.epa.gov/ecotox/). An external separated by commas file (.csv) could be uploaded by the user according to the format of the ``template.csv`` file attached in the repo. 
 
@@ -36,7 +36,7 @@ shinyssd::shinyssd_run()
 
 The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI: [@zenodo]
 
-# Community guidelines
+## Community guidelines
 
 Report Issues:
 
@@ -46,10 +46,10 @@ Contribution to the software:
 
 - Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
 
-# Acknowledgements
+## Acknowledgements
 
 We wish to thank the R community, R-Ladies and Las de Sistemas for their help and support.
  
-# How to use? / ¿Cómo usar shinyssd? (in Spanish)
+## How to use shinyssd? / ¿Cómo usar shinyssd? (in Spanish)
 
-![alt text](https://raw.githubusercontent.com/flor14/shinyssd/shinyssd/imagen_shiny.png)
+![imagen_shiny](https://raw.githubusercontent.com/flor14/shinyssd/shinyssd/imagen_shiny.png)
