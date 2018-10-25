@@ -2,6 +2,7 @@
 ---
 # *shinyssd*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
 ---
+D'Andrea, MF; Brodeur, JC
 
 ## Summary
 
