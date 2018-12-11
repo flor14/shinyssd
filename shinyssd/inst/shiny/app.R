@@ -19,7 +19,7 @@ tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFact
 
 # User Interfase -----------------------------------------
 
-ui <- navbarPage(id = "navbar", "shinySSD version 1.0: Species Sensitivity Distribution",
+ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution for Ecotoxicological Risk Assessment",
                  theme = "inst/shiny/www/bootstrap.css",
                  tabPanel("Database", h4("Upload a database"), fileInput("file1", "Choose CSV File", multiple = FALSE, accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"), buttonLabel = "Browse..."), hr(), span(textOutput("Alertunits"), hr( color = "purple" ), style = "color:red"), DT::dataTableOutput(outputId = "contents")),
                  tabPanel("SSD",
