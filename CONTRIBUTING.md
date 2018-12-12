@@ -1,4 +1,4 @@
-# Contributing to p4_2_scenarios
+# Contributing to shinyssd
 
 This outlines how to propose a change to shinyssd. For more detailed
 info about contributing to this, and other tidyverse packages, please see the
@@ -40,7 +40,7 @@ GitHub username, and links to relevant issue(s)/PR(s).
 
 ### Code of Conduct
 
-Please note that the p4_2_scenarios project is released with a
+Please note that the shinyssd project is released with a
 [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this
 project you agree to abide by its terms.
 
