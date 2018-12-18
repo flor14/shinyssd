@@ -178,7 +178,7 @@ server <- function(input, output, session){
      colnames(lista) <- c("sps_sc_name", "sps_group")
      ul <- list %>%
        group_by_(sps_sc_name, sps_group) %>%
-       summarise()
+       summarise_()
      colnames(ul) <- c("sps_sc_name", "sps_group")
      ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
      colnames(ta) <- c("sps_sc_name", "sps_group", "values", "frac")
@@ -190,11 +190,11 @@ server <- function(input, output, session){
     visual <- tbl() %>%
       dplyr::filter(input$chem_name == chem_name) %>%
       group_by_(sps_group, sps_sc_name, endpoint, chem_name) %>%
-      summarise(n())
+      summarise_(n())
     colnames(visual)<-c("sps_group", "sps_sc_name", "endpoint", "chem_name", "n")
     vis <- visual %>%
       group_by_(sps_group, endpoint) %>%
-      summarise(n())
+      summarise_(n())
     colnames(vis)<-c("sps_group", "endpoint", "n")
     vis$Y1 <- cut(vis$n, breaks = c(0, 8, 10, 30, Inf), right = FALSE)
     print(vis)
