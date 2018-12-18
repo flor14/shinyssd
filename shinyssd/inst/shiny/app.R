@@ -124,7 +124,7 @@ server <- function(input, output, session){
 
   # Read a preloaded table or upload a new one
   tbl <- reactive({
-    in_file<- input$file1
+    in_file <- input$file1
     if (is.null(in_file)){
       return(tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFactors = FALSE))} else {
         return(tbl <- read.delim(in_file$datapath, sep = ",",  col.names = colnames, stringsAsFactors = FALSE))}
@@ -177,7 +177,7 @@ server <- function(input, output, session){
   lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
      ul <- list %>%
-       group_by(sps_sc_name, sps_group) %>%
+       group_by_(sps_sc_name, sps_group) %>%
        summarise()
      colnames(ul) <- c("sps_sc_name", "sps_group")
      ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
@@ -189,11 +189,11 @@ server <- function(input, output, session){
    visual <- reactive({
     visual <- tbl() %>%
       dplyr::filter(input$chem_name == chem_name) %>%
-      group_by(sps_group, sps_sc_name, endpoint, chem_name) %>%
+      group_by_(sps_group, sps_sc_name, endpoint, chem_name) %>%
       summarise(n())
     colnames(visual)<-c("sps_group", "sps_sc_name", "endpoint", "chem_name", "n")
     vis <- visual %>%
-      group_by(sps_group, endpoint) %>%
+      group_by_(sps_group, endpoint) %>%
       summarise(n())
     colnames(vis)<-c("sps_group", "endpoint", "n")
     vis$Y1 <- cut(vis$n, breaks = c(0, 8, 10, 30, Inf), right = FALSE)
