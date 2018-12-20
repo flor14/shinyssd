@@ -176,7 +176,7 @@ server <- function(input, output, session){
     
      lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
-     ul <- list %>%
+     ul <- lista %>%
        dplyr::group_by(sps_sc_name, sps_group) %>%
        dplyr::summarise()
      colnames(ul) <- c("sps_sc_name", "sps_group")
