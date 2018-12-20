@@ -174,7 +174,7 @@ server <- function(input, output, session){
      ta <- ta[order(ta$values), ]
      ta$frac <- ppoints(ta$values, 0.5)
     
-  lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
+     lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
      ul <- list %>%
        group_by_(sps_sc_name, sps_group) %>%
