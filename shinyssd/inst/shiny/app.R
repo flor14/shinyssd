@@ -168,13 +168,14 @@ server <- function(input, output, session){
 
   # When there are reported bioassays for the same species, the geometric mean is calculated 
   geom <- reactive({
-     ta <- as.data.frame(tapply(as.numeric(filtered()$values), filtered()$sps_sc_name, FUN = geoMean))
+     faux <- filtered()
+     ta <- as.data.frame(tapply(as.numeric(faux$values), faux$sps_sc_name, FUN = geoMean))
      ta <- tibble::rownames_to_column(ta, var = "rowname")
      colnames(ta) <- c("sps_sc_name", "values")
      ta <- ta[order(ta$values), ]
      ta$frac <- ppoints(ta$values, 0.5)
     
-     lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
+     lista <- data.frame(faux$sps_sc_name, faux$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
      ul <- lista %>%
        dplyr::group_by(sps_sc_name, sps_group) %>%
