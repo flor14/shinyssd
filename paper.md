@@ -72,7 +72,7 @@ Contribution to the software:
 
 # Acknowledgements
 
-We wish to thank the R community and R-Ladies for their help and support.
+We wish to thank Ana Diedrichs, the R community and R-Ladies for their help and support.
  
 # References
 
