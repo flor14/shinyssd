@@ -231,7 +231,7 @@ server <- function(input, output, session){
   })
 
   fit_w <- reactive({
-    fitdist(as.numeric(geom()$values), "weibull", lower = c(0, 0))
+    fitdist(as.numeric(geom()$values), "weibull", method = "mme")
   })
 
   fit_P <- reactive({
