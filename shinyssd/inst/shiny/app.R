@@ -168,17 +168,18 @@ server <- function(input, output, session){
 
   # When there are reported bioassays for the same species, the geometric mean is calculated 
   geom <- reactive({
-     ta <- as.data.frame(tapply(as.numeric(filtered()$values), filtered()$sps_sc_name, FUN = geoMean))
+     faux <- filtered()
+     ta <- as.data.frame(tapply(as.numeric(faux$values), faux$sps_sc_name, FUN = geoMean))
      ta <- tibble::rownames_to_column(ta, var = "rowname")
      colnames(ta) <- c("sps_sc_name", "values")
      ta <- ta[order(ta$values), ]
      ta$frac <- ppoints(ta$values, 0.5)
     
-  lista <- data.frame(filtered()$sps_sc_name, filtered()$sps_group)
+     lista <- data.frame(faux$sps_sc_name, faux$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
-     ul <- list %>%
-       group_by_(sps_sc_name, sps_group) %>%
-       summarise_()
+     ul <- lista %>%
+       dplyr::group_by(sps_sc_name, sps_group) %>%
+       dplyr::summarise()
      colnames(ul) <- c("sps_sc_name", "sps_group")
      ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
      colnames(ta) <- c("sps_sc_name", "sps_group", "values", "frac")
@@ -189,12 +190,12 @@ server <- function(input, output, session){
    visual <- reactive({
     visual <- tbl() %>%
       dplyr::filter(input$chem_name == chem_name) %>%
-      group_by_(sps_group, sps_sc_name, endpoint, chem_name) %>%
-      summarise_(n())
+      dplyr::group_by(sps_group, sps_sc_name, endpoint, chem_name) %>%
+      dplyr::summarise(n())
     colnames(visual)<-c("sps_group", "sps_sc_name", "endpoint", "chem_name", "n")
     vis <- visual %>%
-      group_by_(sps_group, endpoint) %>%
-      summarise_(n())
+      dplyr::group_by(sps_group, endpoint) %>%
+      dplyr::summarise(n())
     colnames(vis)<-c("sps_group", "endpoint", "n")
     vis$Y1 <- cut(vis$n, breaks = c(0, 8, 10, 30, Inf), right = FALSE)
     print(vis)
