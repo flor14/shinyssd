@@ -431,7 +431,7 @@ server <- function(input, output, session){
                      sps_group = input$sps_group,
                      chem_type = input$chem_type,
                      exp_type = input$exp_type,
-                     nalytic_validation = input$analytic_validation,
+                     analytic_validation = input$analytic_validation,
                      test_location = input$test_location,
                      exposure_media = input$exposure_media,
                      media_type = input$media_type,
