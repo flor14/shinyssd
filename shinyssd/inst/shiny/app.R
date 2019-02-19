@@ -57,32 +57,38 @@ server <- function(input, output, session){
   # UI selectize paramenters 
 
   output$effect_out <- renderUI ({
-    selectizeInput(inputId = "effect", "Effect", choices = as.character(unique(filter()$`effect`)),
+    selectizeInput(inputId = "effect", "Effect",
+                   choices = as.character(unique(filter()$`effect`)),
                    selected = as.character(unique(filter()$`effect`)), multiple = TRUE)
   })
 
   output$sps_group_out <- renderUI({
-    selectizeInput(inputId = "sps_group", "Species Group", choices = as.character(unique(filter()$`sps_group`)),
+    selectizeInput(inputId = "sps_group", "Species Group", 
+                   choices = as.character(unique(filter()$`sps_group`)),
                    selected = as.character(unique(filter()$`sps_group`)), multiple = TRUE)
   })
 
   output$chem_type_out <- renderUI ({
-    selectizeInput(inputId = "chem_type", "Chemical Type", choices = as.character(unique(filter()$`chem_type`)),
+    selectizeInput(inputId = "chem_type", "Chemical Type",
+                   choices = as.character(unique(filter()$`chem_type`)),
                    selected = as.character(unique(filter()$`chem_type`)), multiple = TRUE)
   })
 
   output$analytic_validation_out <- renderUI({
-    selectizeInput(inputId = "analytic_validation", "Analytic Validation", choices = as.character(unique(filter()$`analytic_validation`)),
+    selectizeInput(inputId = "analytic_validation", "Analytic Validation", 
+                   choices = as.character(unique(filter()$`analytic_validation`)),
                    selected = as.character(unique(filter()$`analytic_validation`)), multiple = TRUE)
   })
 
   output$test_location_out <- renderUI({
-    selectizeInput(inputId = "test_location", "Test Location", choices = as.character(unique(filter()$`test_location`)),
+    selectizeInput(inputId = "test_location", "Test Location",
+                   choices = as.character(unique(filter()$`test_location`)),
                    selected = as.character(unique(filter()$`test_location`)), multiple = TRUE)
   })
 
   output$exp_type_out <- renderUI({
-    selectizeInput(inputId = "exp_type", "Exposure Type", choices = as.character(unique(filter()$`exp_type`)),
+    selectizeInput(inputId = "exp_type", "Exposure Type",
+                   choices = as.character(unique(filter()$`exp_type`)),
                    selected = as.character(unique(filter()$`exp_type`)), multiple = TRUE)
   })
 
@@ -92,12 +98,14 @@ server <- function(input, output, session){
   })
 
   output$media_type_out <- renderUI({
-    selectizeInput(inputId = "media_type", "Media Type", choices = as.character(unique(filter()$`media_type`)),
+    selectizeInput(inputId = "media_type", "Media Type",
+                   choices = as.character(unique(filter()$`media_type`)),
                    selected = as.character(unique(filter()$`media_type`)), multiple = TRUE)
   })
 
   output$org_lifestage_out <- renderUI({
-    selectizeInput(inputId = "org_lifestage", "Organism Lifestage", choices = as.character(unique(filter()$`org_lifestage`)),
+    selectizeInput(inputId = "org_lifestage", "Organism Lifestage",
+                   choices = as.character(unique(filter()$`org_lifestage`)),
                    selected = as.character(unique(filter()$`org_lifestage`)), multiple = TRUE)
   })
 
@@ -126,7 +134,8 @@ server <- function(input, output, session){
   tbl <- reactive({
     in_file <- input$file1
     if (is.null(in_file)){
-      return(tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFactors = FALSE))} else {
+      return(tbl <- read.delim("database.csv", sep = ",",
+                               col.names = colnames, stringsAsFactors = FALSE))} else {
         return(tbl <- read.delim(in_file$datapath, sep = ",",  col.names = colnames, stringsAsFactors = FALSE))}
   })
  
@@ -150,18 +159,23 @@ server <- function(input, output, session){
   # Filtering the database ----------------------------------
   # Filter pesticide + endpoint (user election)
   
-  filter <- reactive ({
+  filter <- reactive({
     tbl() %>%
       dplyr::filter(input$endpoint == endpoint & input$chem_name == chem_name )
   })
 
   # Filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage 
   
-  filtered <- reactive ({
+  filtered <- reactive({
     filt <- filter() %>%
-      dplyr::filter(chem_type %in% input$chem_type & analytic_validation %in% input$analytic_validation & 
-                    exp_type %in% input$exp_type & sps_group %in% input$sps_group & effect %in% input$effect &
-                    org_lifestage %in% input$org_lifestage & exposure_media %in% input$exposure_media & media_type %in% input$media_type)
+      dplyr::filter(chem_type %in% input$chem_type &
+                    analytic_validation %in% input$analytic_validation & 
+                    exp_type %in% input$exp_type & 
+                    sps_group %in% input$sps_group & 
+                    effect %in% input$effect &
+                    org_lifestage %in% input$org_lifestage & 
+                    exposure_media %in% input$exposure_media & 
+                    media_type %in% input$media_type)
     filt$sps_sc_name <- as.factor(filt$sps_sc_name)
     filt
   })
@@ -209,10 +223,10 @@ server <- function(input, output, session){
   # ggplot / geom_tile ----------------------------------------------------   
 
   output$database <- renderPlot({
+    cols <- c("[0,8)" = "red", "[8,10)" = "yellow", "[10,30)" = "lightgreen", "[30,Inf)" = "darkgreen")
     print(ggplot(visual(), aes(x = endpoint, y = sps_group, fill = Y1)) +
             geom_tile(width = 0.4, height = 0.35) +
-            scale_fill_manual(breaks = c("[0,8)", "[8,10)", "[10,30)", "[30,Inf)"),
-                              values = c("red", "yellow", "lightgreen", "darkgreen"),
+            scale_fill_manual(values = cols,
                               labels = c("1-8", "8-10", "10-30", "More than 30")) +
             labs(fill = "Number of species", size = 4, y = "Species group", x = "Endpoint") +
             theme_bw() +
@@ -231,7 +245,7 @@ server <- function(input, output, session){
   })
 
   fit_w <- reactive({
-    fitdist(as.numeric(geom()$values), "weibull", method = "mme")
+    fitdist(as.numeric(geom()$values), "weibull", method = "mle")
   })
 
   fit_P <- reactive({
@@ -258,7 +272,11 @@ server <- function(input, output, session){
     sll <- summary(fit_ll())
     slw <- summary(fit_w())
     slP <- summary(fit_P())
-    aics <- data.frame(aic = c(round(sln$aic, digits = 5), round(sll$aic, digits = 5), round(slw$aic, digits = 5), round(slP$aic, digits = 5)), Names = c("log-normal", "log-logistic", "weibull", "pareto"))
+    aics <- data.frame(aic = c(round(sln$aic, digits = 5), 
+                               round(sll$aic, digits = 5),
+                               round(slw$aic, digits = 5),
+                               round(slP$aic, digits = 5)), 
+                       Names = c("log-normal", "log-logistic", "weibull", "pareto"))
     aics <- data.frame(aics[order(aics$aic),])
     print(aics)
   })
@@ -319,7 +337,10 @@ server <- function(input, output, session){
     loglog <- quantile(fit_ll(), probs = c(0.01, 0.05, 0.1))
     weib <- quantile(fit_w(), probs = c(0.01, 0.05, 0.1))
     pare <- quantile(fit_P(), probs = c(0.01, 0.05, 0.1))
-    dist_data <- rbind(round(lognor$quantiles, digits = 3), round(loglog$quantiles, digits = 3), round(weib$quantiles, digits = 3), round(pare$quantiles, digits = 3))
+    dist_data <- rbind(round(lognor$quantiles, digits = 3), 
+                       round(loglog$quantiles, digits = 3),
+                       round(weib$quantiles, digits = 3),
+                       round(pare$quantiles, digits = 3))
     rownames(dist_data) <- c("log-normal", "log-logistic", "weibull", "pareto")
     colnames(dist_data) <- c("HC1%", "HC5%", "HC10%")
     print(dist_data)
@@ -350,8 +371,10 @@ server <- function(input, output, session){
     boot_ll <- quantile(reac_ll(), probs = c(0.01, 0.05, 0.1))
     boot_w <- quantile(reac_w(), probs = c(0.01, 0.05, 0.1))
     boot_p <- quantile(reac_p(), probs = c(0.01, 0.05, 0.1))
-    boot_data <- rbind(round(boot_ln$quantCI, digits = 3), round(boot_ll$quantCI, digits = 3),
-                       round(boot_w$quantCI, digits = 3), round(boot_p$quantCI, digits = 3))
+    boot_data <- rbind(round(boot_ln$quantCI, digits = 3), 
+                       round(boot_ll$quantCI, digits = 3),
+                       round(boot_w$quantCI, digits = 3),
+                       round(boot_p$quantCI, digits = 3))
     boot_data[ ,"CI"] <- c("2.5%", "97.5%", "2.5%", "97.5%", "2.5%", "97.5%", "2.5%", "97.5%")
     boot_data[ ,"Names"] <- c("log-normal", "", "log-logistic", "", "weibull", "", "pareto", "")
     boot_data <- boot_data[ ,c("Names", "CI", "p=0.01", "p=0.05", "p=0.1")]
