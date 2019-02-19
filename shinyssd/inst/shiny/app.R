@@ -21,7 +21,11 @@ tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFact
 
 ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution for Ecotoxicological Risk Assessment",
                  theme = "inst/shiny/www/bootstrap.css",
-                 tabPanel("Database", h4("Upload a database"), fileInput("file1", "Choose CSV File", multiple = FALSE, accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"), buttonLabel = "Browse..."), hr(), span(textOutput("Alertunits"), hr( color = "purple" ), style = "color:red"), DT::dataTableOutput(outputId = "contents")),
+                 tabPanel("Database", h4("Upload a database"),
+                          fileInput("file1", "Choose CSV File", multiple = FALSE,
+                                    accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"), buttonLabel = "Browse..."),
+                          hr(), span(textOutput("Alertunits"), hr( color = "purple" ), style = "color:red"),
+                          DT::dataTableOutput(outputId = "contents")),
                  tabPanel("SSD",
                           sidebarLayout(
                             sidebarPanel(h4("Define SSD parameters"),
@@ -46,8 +50,11 @@ ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution
                                        h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), hr(),
                                        verbatimTextOutput(outputId = "gof"),
                                        h6("For the correct interpretation of this extended results, the reading of the fitdistrplus package manual is recommended")),
-                              tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"), ggiraphOutput(outputId = "coolplot"), hr(),
-                                       h4("Hazard Concentration (HC)"), textOutput(outputId = "bestfit2"), verbatimTextOutput(outputId = "hc5"), hr(), h4("Confidence Intervals (CI)"), verbatimTextOutput(outputId = "boot")))))),
+                              tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"),
+                                       ggiraphOutput(outputId = "coolplot"), hr(),
+                                       h4("Hazard Concentration (HC)"), textOutput(outputId = "bestfit2"),
+                                       verbatimTextOutput(outputId = "hc5"), hr(), h4("Confidence Intervals (CI)"), 
+                                       verbatimTextOutput(outputId = "boot")))))),
                  tabPanel("Contact", h5("MAIL: florencia.dandrea@gmail.com + GITHUB: flor14/shinyssd")))
 
 # Server -------------------------------------------------
@@ -128,7 +135,7 @@ server <- function(input, output, session){
   # Tabpanel "Database" ------------------------------------
   # Size of the file
 
-  options(shiny.maxRequestSize = 30*1024^2)
+  options(shiny.maxRequestSize = 30*1024^2, shiny.launch.browser = TRUE)
 
   # Read a preloaded table or upload a new one
   tbl <- reactive({
