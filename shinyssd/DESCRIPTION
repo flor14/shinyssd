@@ -12,20 +12,22 @@ Description: The shinyssd web application is a versatile and easy to use tool th
     Hazard Concentration 1 percent (HC1), 5 percent (HC5) and 10 percent (HC10) associated to the four distribution models
     together with its confidence intervals, allowing the user to select the statistical distribution and associated HC
     values that best adjust the dataset.
+Depends: 
+  R (>= 3.4.1)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny,
-    dplyr,
-    ggplot2,
-    fitdistrplus,
-    EnvStats,
-    actuar,
-    DT,
-    tibble,
-    ggiraph,
-    rmarkdown
+    shiny (>= 1.1.0),
+    dplyr (>= 0.7.6),
+    ggplot2 (>= 3.0.0),
+    fitdistrplus (>= 1.0-11),
+    EnvStats (>= 2.3.1),
+    actuar (>= 2.3-1),
+    DT (>= 0.4),
+    tibble (>= 1.4.0),
+    ggiraph (>= 0.5.0),
+    rmarkdown (>= 1.1.0)
 RoxygenNote: 6.1.0
 Suggests: 
     shinytest
