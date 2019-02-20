@@ -51,6 +51,17 @@ Contribution to the software:
 
 We wish to thank the R community and R-Ladies or their help and support.
  
-## How to use shinyssd? / ¿Cómo usar shinyssd? (in Spanish)
+## How to use shinyssd? 
 
+1 - The user can load their own database in .csv format
+2 - The application emphasizes checking units of toxicological data
+3 - Once loaded, the database is displayed in this tab
 ![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny.png)
+4 -The second tab allows to visualize the groups of species for which toxicological data are available per substance in the database.
+5 -The amount of data in the database in each case is important since there is a minimum number of data to construct a valid SSD curve.
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny2.png)
+6 - After selecting the substance to be studied and the groups of species, the user can filter and select subsets of data by applying different criterias (for example, if the analytical validation of the concentrations of the substance evaluated in those trials was reported. toxicological).
+7 - The final SSD curve adjusts to different distributions using the fitdistrplus packages and actuar. The HC5 is estimated by the distribution that presents the best goodness of fit.
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny3.png)
+8 - It allows you to download a report generated with RMarkdown in .docx format with all the selected inputs and their corresponding outputs
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny4.png)
