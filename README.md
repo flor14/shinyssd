@@ -50,31 +50,33 @@ Contribution to the software:
 
 ## Acknowledgements
 
-We wish to thank the R community and R-Ladies or their help and support.
+We wish to thank Ana Laura Diedrichs and R-Ladies or their help and support.
  
 ## How to use shinyssd? 
 
-1 - The user can load their own database in .csv format
+1 - The user can upload their own database in .csv format according to the template.csv file found in this same repository
 
-2 - The application emphasizes checking units of toxicological data
+2 - Shinyssd checks that the units are homogeneous
 
-3 - Once loaded, the database is displayed in this tab
+3 - Once loaded, the database is displayed
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny.png" width="500">
 
-4 -The second tab allows to visualize the groups of species for which toxicological data are available per substance in the database.
+4 - The "Visualization" tab allows you to see how many species have enough data to estimate the SSD for a selected toxic substance.
 
-5 -The amount of data in the database in each case is important since there is a minimum number of data to construct a valid SSD curve.
+5 -There are minimum requirements for the amount of data to build a valid SSD curve. The colors indicate different criteria within the bibliography.
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny2.png" width="500">
 
-6 - After selecting the substance to be studied and the groups of species, the user can filter and select subsets of data by applying different criterias (for example, if the analytical validation of the concentrations of the substance evaluated in those trials was reported. toxicological).
+6 - After selecting the substance to be studied and the groups of species, the user can filter and select subsets of data by applying different criterias (for example, if the analytical validation of the concentrations of the substance evaluated in those trials was reported).
 
-7 - The final SSD curve adjusts to different distributions using the fitdistrplus packages and actuar. The HC5 is estimated by the distribution that presents the best goodness of fit.
+7 - The SSD curve is adjusted to different distributions according to the previously selected data. The HC1, HC5 and HC10 are estimated from the distribution that presents the best goodness of fit.
+
+8 - Shinyssd allows you to download a report in .docx format with the data selection and the results obtained.
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny3.png" width="500">
 
-8 - It allows you to download a report generated with RMarkdown in .docx format with all the selected inputs and their corresponding outputs
+9 - In the tab "HC5 and Plot" you can identify each of the SSD species and obtain the values of HC1, HC5 and HC10 with their confidence intervals.
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny4.png" width="500">)
 
