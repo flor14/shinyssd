@@ -350,7 +350,7 @@ server <- function(input, output, session){
     pare <- quantile(fit_P(), probs = c(0.01, 0.05, 0.1))
     dist_data <- rbind(lognor$quantiles, 
                        loglog$quantiles,
-                       weib$quantiles),
+                       weib$quantiles,
                        pare$quantiles)
     rownames(dist_data) <- c("log-normal", "log-logistic", "weibull", "pareto")
     colnames(dist_data) <- c("HC1%", "HC5%", "HC10%")
