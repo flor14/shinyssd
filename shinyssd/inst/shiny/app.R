@@ -9,6 +9,10 @@ library(tibble)
 library(ggiraph)
 library(rmarkdown)
 
+# Scientific notation
+options(scipen = -1)
+options(digits = 3)
+
 # Read preloaded database --------------------------------
 colnames <- c("order", "cas_number", "chem_name",  "chem_purity",  "sps_sc_name", "sps_group", "org_lifestage",	"exp_type",
               "analytic_validation", "media_type", "test_location", "endpoint", "effect", "effect_measurement", "chem_type",
@@ -279,10 +283,10 @@ server <- function(input, output, session){
     sll <- summary(fit_ll())
     slw <- summary(fit_w())
     slP <- summary(fit_P())
-    aics <- data.frame(aic = c(round(sln$aic, digits = 5), 
-                               round(sll$aic, digits = 5),
-                               round(slw$aic, digits = 5),
-                               round(slP$aic, digits = 5)), 
+    aics <- data.frame(aic = c(sln$aic, 
+                               sll$aic,
+                               slw$aic,
+                               slP$aic), 
                        Names = c("log-normal", "log-logistic", "weibull", "pareto"))
     aics <- data.frame(aics[order(aics$aic),])
     print(aics)
@@ -344,10 +348,10 @@ server <- function(input, output, session){
     loglog <- quantile(fit_ll(), probs = c(0.01, 0.05, 0.1))
     weib <- quantile(fit_w(), probs = c(0.01, 0.05, 0.1))
     pare <- quantile(fit_P(), probs = c(0.01, 0.05, 0.1))
-    dist_data <- rbind(round(lognor$quantiles, digits = 3), 
-                       round(loglog$quantiles, digits = 3),
-                       round(weib$quantiles, digits = 3),
-                       round(pare$quantiles, digits = 3))
+    dist_data <- rbind(lognor$quantiles, 
+                       loglog$quantiles,
+                       weib$quantiles),
+                       pare$quantiles)
     rownames(dist_data) <- c("log-normal", "log-logistic", "weibull", "pareto")
     colnames(dist_data) <- c("HC1%", "HC5%", "HC10%")
     print(dist_data)
@@ -373,22 +377,21 @@ server <- function(input, output, session){
     bootdist(fit_P(), bootmethod = "param", niter = 750)
   })
 
-  fit_boot <- reactive ({
+  fit_boot <- reactive({
     boot_ln <- quantile(reac_ln(), probs = c(0.01, 0.05, 0.1))
     boot_ll <- quantile(reac_ll(), probs = c(0.01, 0.05, 0.1))
     boot_w <- quantile(reac_w(), probs = c(0.01, 0.05, 0.1))
     boot_p <- quantile(reac_p(), probs = c(0.01, 0.05, 0.1))
-    boot_data <- rbind(round(boot_ln$quantCI, digits = 3), 
-                       round(boot_ll$quantCI, digits = 3),
-                       round(boot_w$quantCI, digits = 3),
-                       round(boot_p$quantCI, digits = 3))
+    boot_data <- rbind(boot_ln$quantCI, 
+                       boot_ll$quantCI,
+                       boot_w$quantCI,
+                       boot_p$quantCI)
     boot_data[ ,"CI"] <- c("2.5%", "97.5%", "2.5%", "97.5%", "2.5%", "97.5%", "2.5%", "97.5%")
     boot_data[ ,"Names"] <- c("log-normal", "", "log-logistic", "", "weibull", "", "pareto", "")
     boot_data <- boot_data[ ,c("Names", "CI", "p=0.01", "p=0.05", "p=0.1")]
     colnames(boot_data) <- c("Names", "CI","HC1%","HC5%","HC10%")
     rownames(boot_data) <- NULL
     print(boot_data)
-
   })
 
   # CI 
@@ -441,7 +444,10 @@ server <- function(input, output, session){
                      outboot = dfboot)
 
 
-      rmarkdown::render("report.Rmd", output_file = file, params = params, envir = new.env(parent = globalenv()))
+      rmarkdown::render("report.Rmd", 
+                        output_file = file, 
+                        params = params,
+                        envir = new.env(parent = globalenv()))
     }, contentType = 'image/png')}
 
   
