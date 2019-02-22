@@ -444,7 +444,7 @@ server <- function(input, output, session){
                      outboot = dfboot)
 
 
-      rmarkdown::render("report.Rmd", 
+      rmarkdown::render(temp_report, 
                         output_file = file, 
                         params = params,
                         envir = new.env(parent = globalenv()))
