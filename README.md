@@ -1,4 +1,4 @@
-
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/banda.png)
 ---
 # *shinyssd v1.0*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
 ---
@@ -65,3 +65,5 @@ We wish to thank the R community and R-Ladies or their help and support.
 ![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny3.png)
 8 - It allows you to download a report generated with RMarkdown in .docx format with all the selected inputs and their corresponding outputs
 ![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny4.png)
+
+![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/banda.png)
