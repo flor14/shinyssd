@@ -56,6 +56,7 @@ We wish to thank the R community and R-Ladies or their help and support.
 1 - The user can load their own database in .csv format
 2 - The application emphasizes checking units of toxicological data
 3 - Once loaded, the database is displayed in this tab
+<img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny.png" width="200">
 ![imagen_shiny](https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny.png)
 4 -The second tab allows to visualize the groups of species for which toxicological data are available per substance in the database.
 5 -The amount of data in the database in each case is important since there is a minimum number of data to construct a valid SSD curve.
