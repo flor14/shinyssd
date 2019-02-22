@@ -98,11 +98,11 @@ params$media_type
 
 ## Plots
 
-```{r out, echo=FALSE, fig.cap="Fig 1. Goodness of fit", out.width = '100%'}
+```{r out, echo=FALSE, fig.cap="Fig 1. Goodness of fit"}
 knitr::include_graphics("out.png")
 ```
 
-```{r out2, echo=FALSE, fig.cap="Fig 2. Species Sensitivity Distribution", out.width = '100%'}
+```{r out2, echo=FALSE, fig.cap="Fig 2. Species Sensitivity Distribution"}
 knitr::include_graphics("out2.png")
 ```
 
