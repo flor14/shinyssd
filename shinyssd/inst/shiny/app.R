@@ -391,7 +391,7 @@ server <- function(input, output, session){
     boot_data <- boot_data[ ,c("Names", "CI", "p=0.01", "p=0.05", "p=0.1")]
     colnames(boot_data) <- c("Names", "CI","HC1%","HC5%","HC10%")
     rownames(boot_data) <- NULL
-    print(boot_data)
+    print(boot_data, row.names = FALSE)
   })
 
   # CI 
