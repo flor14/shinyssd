@@ -1,7 +1,7 @@
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/banda.png" width="1000">
 
 ---
-# *shinyssd v1.0*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
+# *ShinySSD v1.0*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
 ---
 D'Andrea, MF; Brodeur, JC
 
