@@ -10,8 +10,8 @@ library(ggiraph)
 library(rmarkdown)
 
 # Scientific notation
-options(scipen = -1)
-options(digits = 3)
+options(scipen = 0.0001)
+options(digits = 4)
 
 # Read preloaded database --------------------------------
 colnames <- c("order", "cas_number", "chem_name",  "chem_purity",  "sps_sc_name", "sps_group", "org_lifestage",	"exp_type",
