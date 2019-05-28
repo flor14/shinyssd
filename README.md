@@ -36,7 +36,7 @@ library(shinyssd)
 shinyssd::shinyssd_run()
 ```
 
-The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI:10.5281/zenodo.1470880
+The source code for ``shinySSD`` has been archived to Zenodo with the linked DOI:10.5281/zenodo.3233033
 
 ## Community guidelines
 
