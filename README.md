@@ -70,7 +70,7 @@ We wish to thank Ana Laura Diedrichs and R-Ladies or their help and support.
 
 6 - After selecting the substance to be studied and the groups of species, the user can filter and select subsets of data by applying different criterias (for example, if the analytical validation of the concentrations of the substance evaluated in those trials was reported).
 
-7 - The SSD curve is adjusted to different distributions according to the previously selected data. The HC1, HC5 and HC10 are estimated from the distribution that presents the best goodness of fit.
+7 - The SSD curve is adjusted to different distributions according to the previously selected data. The HC<sub>1</sub>, HC<sub>5</sub> and HC<sub>10</sub> are estimated from the distribution that presents the best goodness of fit.
 
 8 - Shinyssd allows you to download a report in .docx format with the data selection and the results obtained.
 
