@@ -62,7 +62,7 @@ shinyssd::shinyssd_run()
 
 Report Issues:
 
-- Questions, feedback, bug reports: please open an issue in the issue tracker of the project (https://github.com/flor14/shinyssd/issues).
+- Questions, feedback, bug reports: please open an issue in the [issue tracker of the project](https://github.com/flor14/shinyssd/issues).
 
 Contribution to the software:
 
