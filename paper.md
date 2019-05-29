@@ -29,7 +29,7 @@ bibliography: paper.bib
 
 # Summary
 
-Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration HC<sub>5</sub>, that is, the concentration at which 5% of the considered species are affected. The HC<sub>5</sub> is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
+Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration 5% (HC<sub>5</sub>), that is, the concentration at which 5% of the considered species are affected. The HC<sub>5</sub> is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
 
 The ``shinyssd`` web application is a versatile and easy to use tool that serves to simultaneously model the SSD curve of a user-defined toxicity dataset based on four different statistical distribution models (log-normal, log-logistic, Weibull, Pareto).  ``shinyssd`` directly calculates three estimators HC<sub>1</sub>, HC<sub>5</sub> and HC<sub>10</sub> associated to the four distribution models together with its confidence intervals, allowing the user to select the statistical distribution and associated HC values that best adjust the dataset. 
 
