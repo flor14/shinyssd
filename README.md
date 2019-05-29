@@ -5,6 +5,8 @@
 ---
 D'Andrea, MF; Brodeur, JC
 
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00785/status.svg)](https://doi.org/10.21105/joss.00785)
+
 ## Summary
 
 Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration 5% (HC<sub>5</sub>), that is, the concentration at which 5% of the considered species are affected. The HC<sub>5</sub> is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
