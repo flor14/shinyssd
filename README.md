@@ -1,15 +1,15 @@
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/banda.png" width="1000">
 
 ---
-# *ShinySSD v1.0*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
+# *shinySSD v1.0*: Species Sensitivity Distributions for Ecotoxicological Risk Assessment  
 ---
 D'Andrea, MF; Brodeur, JC
 
 ## Summary
 
-Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration HC5, that is, the concentration at which 5% of the considered species are affected. The HC5 is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
+Living organisms have different sensitivities to toxicants. This variability can be represented by constructing a species sensitivity distribution (SSD) curve, whereby the toxicity of a substance to a group of species is described by a statistical distribution. Building the SSD curve allows calculating the Hazard Concentration HC~5~, that is, the concentration at which 5% of the considered species are affected. The HC5 is widely used as an environmental quality criterion and a tool for ecological risk assessment (@posthuma2001).
 
-The **ShinySSD** web application is a versatile and easy to use tool that serves to simultaneously model the SSD curve of a user-defined toxicity dataset based on four different statistical distribution models (log-normal, log-logistic, Weibull, Pareto).  ShinySSD directly calculates three estimators HC1, HC5 and HC10 associated to the four distribution models together with its confidence intervals, allowing the user to select the statistical distribution and associated HC values that best adjust the dataset. 
+The **ShinySSD** web application is a versatile and easy to use tool that serves to simultaneously model the SSD curve of a user-defined toxicity dataset based on four different statistical distribution models (log-normal, log-logistic, Weibull, Pareto).  ShinySSD directly calculates three estimators HC~1~, HC~5~ and HC~10~ associated to the four distribution models together with its confidence intervals, allowing the user to select the statistical distribution and associated HC values that best adjust the dataset. 
 
 The level of confidence of the results obtained from a SSD curve will depend on the number of species used to produce the SSD. In this sense, the first tab of the user interface is used for visualizing the number of species for which toxicological data are available for each toxicant , species group and endpoint combination in the uploaded dataset. A minimum of species is necessary to build a SSD curve varies according to the literature (@belanger2016, @efsa2013, @wheeler2002, @newman2000).
 
@@ -23,7 +23,7 @@ By facilitating and streamlining toxicity data analysis and the creation of SSD 
 
 - There is a warning alert message if you are entering data with different units, to avoid conflictive results.
 
-- ShinySSD includes the option of download the relevant results as a .docx report.
+- shinySSD includes the option of download the relevant results as a .docx report.
 
 - ShinySSD is optimized for browser use.
 
