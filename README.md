@@ -40,20 +40,6 @@ shinyssd::shinyssd_run()
 
 The source code for ``shinyssd`` has been archived to Zenodo with the linked DOI:10.5281/zenodo.3233033
 
-## Community guidelines
-
-Report Issues:
-
-- Questions, feedback, bug reports: please open an issue in the issue tracker of the project [here](https://github.com/flor14/shinyssd/issues).
-
-Contribution to the software:
-
-- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
-
-## Acknowledgements
-
-We wish to thank Ana Laura Diedrichs and R-Ladies or their help and support.
- 
 ## How to use ``shinyssd``? 
 
 1 - The user can upload their own database in .csv format according to the template.csv file found in this same repository
@@ -83,3 +69,18 @@ We wish to thank Ana Laura Diedrichs and R-Ladies or their help and support.
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny4.png" width="500">)
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/banda.png" width="1000">
+
+## Community guidelines
+
+Report Issues:
+
+- Questions, feedback, bug reports: please open an issue in the issue tracker of the project [here](https://github.com/flor14/shinyssd/issues).
+
+Contribution to the software:
+
+- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
+
+## Acknowledgements
+
+We wish to thank Ana Laura Diedrichs and R-Ladies for their help and support.
+ 

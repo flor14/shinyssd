@@ -13,8 +13,11 @@ library(rmarkdown)
 options(scipen = 0.01)
 
 # Read preloaded database --------------------------------
-colnames <- c("order", "cas_number", "chem_name",  "chem_purity",  "sps_sc_name", "sps_group", "org_lifestage",	"exp_type",
-              "analytic_validation", "media_type", "test_location", "endpoint", "effect", "effect_measurement", "chem_type",
+colnames <- c("order", "cas_number", "chem_name",
+              "chem_purity",  "sps_sc_name", "sps_group",
+              "org_lifestage",	"exp_type", "analytic_validation",
+              "media_type", "test_location", "endpoint",
+              "effect", "effect_measurement", "chem_type",
               "values", "units", "exposure_media")
 
 tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFactors = FALSE)
@@ -45,26 +48,42 @@ ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution
                                          htmlOutput(outputId = "exposure_media_out"),
                                          htmlOutput(outputId = "media_type_out"),
                                          htmlOutput(outputId = "org_lifestage_out"),
-                                         downloadButton("report", "Download Report", class = "btn-info")),
+                                         downloadButton("report", "Download Report",
+                                                        class = "btn-info")),
                             mainPanel(tabsetPanel(id = "tabsetpanel",
-                              tabPanel("Visualization", h4(textOutput("chemical")), plotOutput(outputId = "database")),
-                              tabPanel("Goodness of Fit", plotOutput(outputId = "plotGof", height = 500, width = 500),
-                                       h4("Goodness of Fit"), textOutput(outputId = "bestfit"), hr(),
-                                       h4("Goodness of Fit (Complete Analysis)"), verbatimTextOutput(outputId = "goftest"), hr(),
+                              tabPanel("Visualization",
+                                       h4(textOutput("chemical")),
+                                       plotOutput(outputId = "database")),
+                              tabPanel("Goodness of Fit",
+                                       plotOutput(outputId = "plotGof",
+                                                  height = 500,
+                                                  width = 500),
+                                       h4("Goodness of Fit"),
+                                       textOutput(outputId = "bestfit"),
+                                       hr(),
+                                       h4("Goodness of Fit (Complete Analysis)"),
+                                       verbatimTextOutput(outputId = "goftest"),
+                                       hr(),
                                        verbatimTextOutput(outputId = "gof"),
                                        h6("For the correct interpretation of this extended results, the reading of the fitdistrplus package manual is recommended")),
-                              tabPanel("HC5 and Plot", h6("Slide the mouse over the dots to reveal the name of the species"),
-                                       ggiraphOutput(outputId = "coolplot"), hr(),
-                                       h4("Hazard Concentration (HC)"), textOutput(outputId = "bestfit2"),
-                                       verbatimTextOutput(outputId = "hc5"), hr(), h4("Confidence Intervals (CI)"), 
+                              tabPanel("HC5 and Plot",
+                                       h6("Slide the mouse over the dots to reveal the name of the species"),
+                                       ggiraphOutput(outputId = "coolplot"),
+                                       hr(),
+                                       h4("Hazard Concentration (HC)"),
+                                       textOutput(outputId = "bestfit2"),
+                                       verbatimTextOutput(outputId = "hc5"),
+                                       hr(),
+                                       h4("Confidence Intervals (CI)"),
                                        verbatimTextOutput(outputId = "boot")))))),
-                 tabPanel("Contact", h5("MAIL: florencia.dandrea@gmail.com + GITHUB: flor14/shinyssd")))
+                 tabPanel("Contact",
+                          h5("MAIL: florencia.dandrea@gmail.com + GITHUB: flor14/shinyssd")))
 
 # Server -------------------------------------------------
 
 server <- function(input, output, session){
 
-  # UI selectize paramenters 
+  # UI selectize paramenters
 
   output$effect_out <- renderUI ({
     selectizeInput(inputId = "effect", "Effect",
@@ -73,7 +92,7 @@ server <- function(input, output, session){
   })
 
   output$sps_group_out <- renderUI({
-    selectizeInput(inputId = "sps_group", "Species Group", 
+    selectizeInput(inputId = "sps_group", "Species Group",
                    choices = as.character(unique(filter()$`sps_group`)),
                    selected = as.character(unique(filter()$`sps_group`)), multiple = TRUE)
   })
@@ -85,7 +104,7 @@ server <- function(input, output, session){
   })
 
   output$analytic_validation_out <- renderUI({
-    selectizeInput(inputId = "analytic_validation", "Analytic Validation", 
+    selectizeInput(inputId = "analytic_validation", "Analytic Validation",
                    choices = as.character(unique(filter()$`analytic_validation`)),
                    selected = as.character(unique(filter()$`analytic_validation`)), multiple = TRUE)
   })
@@ -103,14 +122,17 @@ server <- function(input, output, session){
   })
 
   output$exposure_media_out <- renderUI({
-    selectizeInput(inputId = "exposure_media", "Exposure Media", choices = as.character(unique(filter()$`exposure_media`)),
-                   selected = as.character(unique(filter()$`exposure_media`)), multiple = TRUE)
+    selectizeInput(inputId = "exposure_media", "Exposure Media",
+                   choices = as.character(unique(filter()$`exposure_media`)),
+                   selected = as.character(unique(filter()$`exposure_media`)),
+                   multiple = TRUE)
   })
 
   output$media_type_out <- renderUI({
     selectizeInput(inputId = "media_type", "Media Type",
                    choices = as.character(unique(filter()$`media_type`)),
-                   selected = as.character(unique(filter()$`media_type`)), multiple = TRUE)
+                   selected = as.character(unique(filter()$`media_type`)),
+                   multiple = TRUE)
   })
 
   output$org_lifestage_out <- renderUI({
@@ -119,8 +141,8 @@ server <- function(input, output, session){
                    selected = as.character(unique(filter()$`org_lifestage`)), multiple = TRUE)
   })
 
-  # change choices and selections of Select Input when a file is uploaded 
-  
+  # change choices and selections of Select Input when a file is uploaded
+
   observe({
     updateSelectInput(session, "chem_name",
                       label = "Chemical Name",
@@ -134,7 +156,7 @@ server <- function(input, output, session){
                       choices = tbl()$endpoint,
                       selected = tbl()$endpoint[length(tbl()$endpoint)])
   })
-  
+
   # Tabpanel "Database" ------------------------------------
   # Size of the file
 
@@ -145,12 +167,15 @@ server <- function(input, output, session){
     in_file <- input$file1
     if (is.null(in_file)){
       return(tbl <- read.delim("database.csv", sep = ",",
-                               col.names = colnames, stringsAsFactors = FALSE))} else {
-        return(tbl <- read.delim(in_file$datapath, sep = ",",  col.names = colnames, stringsAsFactors = FALSE))}
+                               col.names = colnames,
+                               stringsAsFactors = FALSE))} else {
+        return(tbl <- read.delim(in_file$datapath, sep = ",",
+                                 col.names = colnames,
+                                 stringsAsFactors = FALSE))}
   })
- 
-  # Alertunits 
-  
+
+  # Alertunits
+
   textunits <- reactive({
     if(!length(unique(tbl()$units)) == 1){print("Check!Different units in the database")} else {
       print("Ok! Uniform units")}
@@ -159,57 +184,62 @@ server <- function(input, output, session){
   output$Alertunits <- renderText({
     paste("Database:", textunits())
   })
- 
-  # Table 
-  
+
+  # Table
+
   output$contents <- DT::renderDataTable({
     tbl()
   })
- 
+
   # Filtering the database ----------------------------------
   # Filter pesticide + endpoint (user election)
-  
+
   filter <- reactive({
     tbl() %>%
       dplyr::filter(input$endpoint == endpoint & input$chem_name == chem_name )
   })
 
-  # Filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage 
-  
+  # Filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage
+
   filtered <- reactive({
     filt <- filter() %>%
       dplyr::filter(chem_type %in% input$chem_type &
-                    analytic_validation %in% input$analytic_validation & 
-                    exp_type %in% input$exp_type & 
-                    sps_group %in% input$sps_group & 
+                    analytic_validation %in% input$analytic_validation &
+                    exp_type %in% input$exp_type &
+                    sps_group %in% input$sps_group &
                     effect %in% input$effect &
-                    org_lifestage %in% input$org_lifestage & 
-                    exposure_media %in% input$exposure_media & 
+                    org_lifestage %in% input$org_lifestage &
+                    exposure_media %in% input$exposure_media &
                     media_type %in% input$media_type)
     filt$sps_sc_name <- as.factor(filt$sps_sc_name)
     filt
   })
 
-  # When there are reported bioassays for the same species, the geometric mean is calculated 
+  # When there are reported bioassays for the same species, the geometric mean is calculated
   geom <- reactive({
      faux <- filtered()
-     ta <- as.data.frame(tapply(as.numeric(faux$values), faux$sps_sc_name, FUN = geoMean))
+     ta <- as.data.frame(tapply(as.numeric(faux$values),
+                                faux$sps_sc_name,
+                                FUN = geoMean))
      ta <- tibble::rownames_to_column(ta, var = "rowname")
      colnames(ta) <- c("sps_sc_name", "values")
      ta <- ta[order(ta$values), ]
      ta$frac <- ppoints(ta$values, 0.5)
-    
+
      lista <- data.frame(faux$sps_sc_name, faux$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
      ul <- lista %>%
        dplyr::group_by(sps_sc_name, sps_group) %>%
        dplyr::summarise()
      colnames(ul) <- c("sps_sc_name", "sps_group")
-     ta <- merge(ul, ta, sort = FALSE, by.x = "sps_sc_name", by.y = "sps_sc_name" )
+     ta <- merge(ul, ta,
+                 sort = FALSE,
+                 by.x = "sps_sc_name",
+                 by.y = "sps_sc_name" )
      colnames(ta) <- c("sps_sc_name", "sps_group", "values", "frac")
      ta })
 
-  
+
   # Processing the data for the geom_tile plot --------------
    visual <- reactive({
     visual <- tbl() %>%
@@ -224,13 +254,13 @@ server <- function(input, output, session){
     vis$Y1 <- cut(vis$n, breaks = c(0, 8, 10, 30, Inf), right = FALSE)
     print(vis)
   })
-  
-  # Title ----------------------------------------------------   
+
+  # Title ----------------------------------------------------
   output$chemical <- renderText({
     paste("Number of species by endpoint for", input$chem_name)
   })
 
-  # ggplot / geom_tile ----------------------------------------------------   
+  # ggplot / geom_tile ----------------------------------------------------
 
   output$database <- renderPlot({
     cols <- c("[0,8)" = "red", "[8,10)" = "yellow", "[10,30)" = "lightgreen", "[30,Inf)" = "darkgreen")
@@ -242,10 +272,10 @@ server <- function(input, output, session){
             theme_bw() +
             theme(aspect.ratio = 1.5))
   })
-   
+
   # TABPanel "Goodness of Fit" -------------------------------
   # fitdist
-  
+
   fit_ln <- reactive({
     fitdist(as.numeric(geom()$values), "lnorm")
   })
@@ -262,7 +292,7 @@ server <- function(input, output, session){
     fitdist(as.numeric(geom()$values), "pareto")
   })
 
-  # Plot goodness of fit 
+  # Plot goodness of fit
 
   cdfreact <- reactive({
     cdfcomp(list(fit_ln(), fit_ll(), fit_w(), fit_P()), xlogscale = TRUE, ylogscale = FALSE,
@@ -275,17 +305,17 @@ server <- function(input, output, session){
     print(cdfreact())
   })
 
-  # Best fit aic 
-  
+  # Best fit aic
+
   aics <- reactive({
     sln <- summary(fit_ln())
     sll <- summary(fit_ll())
     slw <- summary(fit_w())
     slP <- summary(fit_P())
-    aics <- data.frame(aic = c(sln$aic, 
+    aics <- data.frame(aic = c(sln$aic,
                                sll$aic,
                                slw$aic,
-                               slP$aic), 
+                               slP$aic),
                        Names = c("log-normal", "log-logistic", "weibull", "pareto"))
     aics <- data.frame(aics[order(aics$aic),])
     print(aics)
@@ -295,8 +325,8 @@ server <- function(input, output, session){
     paste("Lowest AIC value:", as.character(aics()[1,"Names"]), sep = " ")
   })
 
-  # Goodness of fit 
-  
+  # Goodness of fit
+
   gof <- reactive({
     print(gof <- gofstat(list(fit_ln(), fit_ll(), fit_w(), fit_P()),
                          fitnames = c("log-normal", "log-logistic", "weibull", "pareto")))
@@ -313,8 +343,8 @@ server <- function(input, output, session){
   })
 
 # TABPanel "HC5 and Plot" ---------------------------------------------------------
-  # plot 
-  
+  # plot
+
   legend <- data.frame(value = as.numeric(c(0.01, 0.05, 0.1)), name = c("1%", "5%", "10%"))
 
   legend$name <- factor(legend$name, levels = c("1%", "5%", "10%"))
@@ -340,14 +370,14 @@ server <- function(input, output, session){
   })
 
 
-  # HC5 
+  # HC5
 
   hc5 <- reactive ({
     lognor <- quantile(fit_ln(), probs = c(0.01, 0.05, 0.1))
     loglog <- quantile(fit_ll(), probs = c(0.01, 0.05, 0.1))
     weib <- quantile(fit_w(), probs = c(0.01, 0.05, 0.1))
     pare <- quantile(fit_P(), probs = c(0.01, 0.05, 0.1))
-    dist_data <- rbind(lognor$quantiles, 
+    dist_data <- rbind(lognor$quantiles,
                        loglog$quantiles,
                        weib$quantiles,
                        pare$quantiles)
@@ -361,7 +391,7 @@ server <- function(input, output, session){
   })
 
 
-  # Bootstrap 
+  # Bootstrap
 
   reac_ln <- reactive({
     bootdist(fit_ln(), bootmethod = "param", niter = 750)
@@ -381,7 +411,7 @@ server <- function(input, output, session){
     boot_ll <- quantile(reac_ll(), probs = c(0.01, 0.05, 0.1))
     boot_w <- quantile(reac_w(), probs = c(0.01, 0.05, 0.1))
     boot_p <- quantile(reac_p(), probs = c(0.01, 0.05, 0.1))
-    boot_data <- rbind(boot_ln$quantCI, 
+    boot_data <- rbind(boot_ln$quantCI,
                        boot_ll$quantCI,
                        boot_w$quantCI,
                        boot_p$quantCI)
@@ -393,7 +423,7 @@ server <- function(input, output, session){
     print(boot_data, row.names = FALSE)
   })
 
-  # CI 
+  # CI
   output$boot <- renderPrint({
     fit_boot()
   })
@@ -419,14 +449,14 @@ server <- function(input, output, session){
       file.copy("out2.png", temp_image2, overwrite = TRUE)
       file.copy("report.Rmd", temp_report, overwrite = TRUE)
 
-# Generate dataframes for the report 
-      
+# Generate dataframes for the report
+
       dfgof <- as.array(gof())
       dfhc5 <- as.data.frame(hc5())
       dfboot <- as.data.frame(fit_boot())
 
-# Set up parameters for Rmd document 
-      
+# Set up parameters for Rmd document
+
       params <- list(chem_name = input$chem_name,
                      endpoint = input$endpoint,
                      effect = input$effect,
@@ -443,13 +473,13 @@ server <- function(input, output, session){
                      outboot = dfboot)
 
 
-      rmarkdown::render(temp_report, 
-                        output_file = file, 
+      rmarkdown::render(temp_report,
+                        output_file = file,
                         params = params,
                         envir = new.env(parent = globalenv()))
     }, contentType = 'image/png')}
 
-  
+
   # Run the app --------------------------------------------
 
 shiny::shinyApp(ui = ui, server = server)

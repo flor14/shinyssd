@@ -27,7 +27,8 @@ Imports:
     DT (>= 0.4),
     tibble (>= 1.4.0),
     ggiraph (>= 0.5.0),
-    rmarkdown (>= 1.1.0)
-RoxygenNote: 6.1.0
+    rmarkdown (>= 1.1.0),
+    shinycssloaders (>= 1.0.0)
+RoxygenNote: 7.1.1
 Suggests: 
     shinytest
