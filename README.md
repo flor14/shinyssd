@@ -7,7 +7,7 @@ D'Andrea, MF; Brodeur, JC
 
 [![DOI](http://joss.theoj.org/papers/10.21105/joss.00785/status.svg)](https://doi.org/10.21105/joss.00785)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3233033.svg)](https://doi.org/10.5281/zenodo.3233033)
-[![R build status](https://github.com/flor14/shinyssd/workflows/R-CMD-check/badge.svg)](https://github.com/flor14/shinyssd/actions)
+
 
 ## Summary
 
