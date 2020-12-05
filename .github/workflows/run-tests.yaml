@@ -29,6 +29,7 @@ jobs:
         run:
           git config --global core.autocrlf false
         working-directory: shinyssd
+
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@master
@@ -43,6 +44,7 @@ jobs:
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+        working-directory: shinyssd
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -51,7 +53,7 @@ jobs:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
-
+          working-directory: shinyssd
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
@@ -60,11 +62,13 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+        working-directory: shinyssd
 
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
+        working-directory: shinyssd
 
       - name: Find PhantomJS path
         id: phantomjs
@@ -76,20 +80,23 @@ jobs:
           path: ${{ steps.phantomjs.outputs.path }}
           key: ${{ runner.os }}-phantomjs
           restore-keys: ${{ runner.os }}-phantomjs
+          working-directory: shinyssd
+
       - name: Install PhantomJS
         shell: Rscript {0}
         run: |
           options(install.packages.check.source = "no")
           if (!shinytest::dependenciesInstalled()) shinytest::installDependencies()
-
+          working-directory: shinyssd
       - name: Run tests
         shell: Rscript {0}
         run: |
           shiny::runTests(".", assert = TRUE)
-
+        working-directory: shinyssd
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-tests
           path: tests
+          working-directory: shinyssd
