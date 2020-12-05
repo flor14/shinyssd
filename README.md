@@ -16,13 +16,13 @@ The ``shinyssd`` web application is a versatile and easy to use tool that serves
 
 The level of confidence of the results obtained from a SSD curve will depend on the number of species used to produce the SSD. In this sense, the first tab of the user interface is used for visualizing the number of species for which toxicological data are available for each toxicant , species group and endpoint combination in the uploaded dataset. A minimum of species is necessary to build a SSD curve varies according to the literature (@belanger2016, @efsa2013, @wheeler2002, @newman2000).
 
-After selecting the toxicant and species groups, the user can filter and select subsets of data from the whole database by applying different quality criteria, (e.g., if the studies reported a chemical confirmation of the concentrations of the toxicant tested). The values entered in each column of the database serve as categories to filter the database in relation to characteristics of the bioassays. The final SSD curve is fitted to different distributions using the package fitdistrplus and actuar. The HC is estimated for all the distributions.
+After selecting the toxicant and species groups, the user can filter and select subsets of data from the whole database by applying different quality criteria, (e.g., if the studies reported a chemical confirmation of the concentrations of the toxicant tested). The values entered in each column of the database serve as categories to filter the database in relation to characteristics of the bioassays. The final SSD curve is fitted to different distributions using the package `fitdistrplus` and `actuar`. The HC is estimated for all the distributions.
 
 By facilitating and streamlining toxicity data analysis and the creation of SSD curves, the user interface proposed here should be useful for environmental managers and regulators conducting ecological risk assessments and scientific research.
 
 ## Information for Users
 
-- ``shinyssd`` includes a preloaded database with aquatic toxicological data for the pesticides Cypermethrin and Glyphosate. This data was extracted of the ECOTOX database of the the Environmental Protection Agency of the United States (EPA) [link](https://cfpub.epa.gov/ecotox/). An external comma-separated values file. An external separated by commas file (.csv) could be uploaded by the user according to the format of the ``template.csv`` file attached in the repo. 
+- ``shinyssd`` includes a preloaded database with aquatic toxicological data for the pesticides Cypermethrin and Glyphosate. This data was extracted of the ECOTOX database of the the Environmental Protection Agency of the United States (EPA) [link](https://cfpub.epa.gov/ecotox/). An external separated by commas file (.csv) could be uploaded by the user according to the format of the ``template.csv`` file attached in the repo. 
 
 - There is a warning alert message if you are entering data with different units, to avoid conflictive results.
 
@@ -39,13 +39,13 @@ library(shinyssd)
 shinyssd::shinyssd_run()
 ```
 
-The source code for ``shinyssd`` has been archived to Zenodo with the linked DOI:10.5281/zenodo.3233033
+The source code for ``shinyssd`` has been archived to Zenodo with the link DOI:10.5281/zenodo.3233033
 
 ## How to use ``shinyssd``? 
 
-1 - The user can upload their own database in .csv format according to the template.csv file found in this same repository
+1 - The user can upload their own database in .csv format according to the `template.csv` file found in this same repository
 
-2 - Shinyssd checks that the units are homogeneous
+2 - `Shinyssd` checks that the units are homogeneous
 
 3 - Once loaded, the database is displayed
 
@@ -53,7 +53,7 @@ The source code for ``shinyssd`` has been archived to Zenodo with the linked DOI
 
 4 - The "Visualization" tab allows you to see how many species have enough data to estimate the SSD for a selected toxic substance.
 
-5 -There are minimum requirements for the amount of data to build a valid SSD curve. The colors indicate different criteria within the bibliography.
+5 - There are minimum requirements for the amount of data to build a valid SSD curve. The colours indicate different criteria within the bibliography.
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny2.png" width="500">
 
@@ -61,7 +61,7 @@ The source code for ``shinyssd`` has been archived to Zenodo with the linked DOI
 
 7 - The SSD curve is adjusted to different distributions according to the previously selected data. The HC<sub>1</sub>, HC<sub>5</sub> and HC<sub>10</sub> are estimated from the distribution that presents the best goodness of fit.
 
-8 - Shinyssd allows you to download a report in .docx format with the data selection and the results obtained.
+8 - `Shinyssd` allows you to download a report in .docx format with the data selection and the results obtained.
 
 <img src="https://github.com/flor14/shinyssd/blob/master/shinyssd/imagen_shiny3.png" width="500">
 
@@ -79,7 +79,7 @@ Report Issues:
 
 Contribution to the software:
 
-- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must references the corresponding issue.
+- Please open an issue in the issue tracker of the project that describes the changes you would like to make to the software and open a pull request with the changes. The description of the pull request must reference the corresponding issue.
 
 ## Acknowledgements
 
