@@ -1,4 +1,4 @@
-Package: shinyssd 
+Package: shinyssd
 Type: Package
 Title: species sensitivity distributions for ecotoxicological risk assessment
 Version: 1.0.0
@@ -31,4 +31,5 @@ Imports:
     shinycssloaders (>= 1.0.0)
 RoxygenNote: 7.1.1
 Suggests: 
-    shinytest
+    shinytest,
+    testthat
