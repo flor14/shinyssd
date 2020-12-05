@@ -9,7 +9,8 @@ jobs:
   runs-on: ${{ matrix.config.os }}
   defaults:
       run:
-        working-directory: ./shinyssd
+        shell: bash
+        working-directory: shinyssd
 
 name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
