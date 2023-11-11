@@ -195,14 +195,14 @@ server <- function(input, output, session){
   # Filter pesticide + endpoint (user election)
 
   filter <- reactive({
-    tbl() %>%
+    tbl() |>
       dplyr::filter(input$endpoint == endpoint & input$chem_name == chem_name )
   })
 
   # Filter pesticide type + chemical analysis + Exposure type + Species Group + Media type + Organism lifestage
 
   filtered <- reactive({
-    filt <- filter() %>%
+    filt <- filter() |>
       dplyr::filter(chem_type %in% input$chem_type &
                     analytic_validation %in% input$analytic_validation &
                     exp_type %in% input$exp_type &
@@ -228,8 +228,8 @@ server <- function(input, output, session){
 
      lista <- data.frame(faux$sps_sc_name, faux$sps_group)
      colnames(lista) <- c("sps_sc_name", "sps_group")
-     ul <- lista %>%
-       dplyr::group_by(sps_sc_name, sps_group) %>%
+     ul <- lista |>
+       dplyr::group_by(sps_sc_name, sps_group) |>
        dplyr::summarise()
      colnames(ul) <- c("sps_sc_name", "sps_group")
      ta <- merge(ul, ta,
@@ -242,13 +242,13 @@ server <- function(input, output, session){
 
   # Processing the data for the geom_tile plot --------------
    visual <- reactive({
-    visual <- tbl() %>%
-      dplyr::filter(input$chem_name == chem_name) %>%
-      dplyr::group_by(sps_group, sps_sc_name, endpoint, chem_name) %>%
+    visual <- tbl() |>
+      dplyr::filter(input$chem_name == chem_name) |>
+      dplyr::group_by(sps_group, sps_sc_name, endpoint, chem_name) |>
       dplyr::summarise(n())
     colnames(visual)<-c("sps_group", "sps_sc_name", "endpoint", "chem_name", "n")
-    vis <- visual %>%
-      dplyr::group_by(sps_group, endpoint) %>%
+    vis <- visual |>
+      dplyr::group_by(sps_group, endpoint) |>
       dplyr::summarise(n())
     colnames(vis)<-c("sps_group", "endpoint", "n")
     vis$Y1 <- cut(vis$n, breaks = c(0, 8, 10, 30, Inf), right = FALSE)
@@ -295,8 +295,8 @@ server <- function(input, output, session){
   # Plot goodness of fit
 
   cdfreact <- reactive({
-    cdfcomp(list(fit_ln(), fit_ll(), fit_w(), fit_P()), xlogscale = TRUE, ylogscale = FALSE,
-            legendtext = c("log-normal", "log-logistic", "weibull", "pareto"), lwd = 2,
+    fitdistrplus::cdfcomp(list(fit_ln(), fit_ll(), fit_w(), fit_P()), xlogscale = TRUE, ylogscale = FALSE,
+            legendtext = c("log-normal", "log-logistic", "weibull", "pareto"), fitlwd = 2,
             xlab = paste("Log10 Conc. of", input$chem_name, "(", as.character(unique(tbl()$units)), ")", sep = " "),
             ylab = 'Fraction of species affected')
   })
@@ -351,7 +351,7 @@ server <- function(input, output, session){
 
 
   codeplot<- reactive({
-    ggplot(geom()) +
+    ggplot2::ggplot(geom()) +
       geom_point_interactive(aes(x = values, y = frac, color = sps_group, tooltip = sps_sc_name), size = 1.5) +
       theme_bw() +
       geom_hline(data = legend, aes(yintercept = value, linetype = name), color = "black") +
@@ -361,8 +361,8 @@ server <- function(input, output, session){
            y = "Fraction of species affected")
   })
 
-  output$coolplot <- renderggiraph({
-    ggiraph(code = print(codeplot()), selection_type = "none")
+  output$coolplot <- renderGirafe({
+    ggiraph::girafe(code = print(codeplot()))
   })
 
   output$bestfit2 <- renderText({
