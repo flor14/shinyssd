@@ -8,6 +8,7 @@ library(DT)
 library(tibble)
 library(ggiraph)
 library(rmarkdown)
+library(shinycssloaders)
 
 # Scientific notation
 options(scipen = 0.01)
@@ -28,9 +29,16 @@ tbl <- read.delim("database.csv", sep = ",", col.names = colnames, stringsAsFact
 ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution for Ecotoxicological Risk Assessment",
                  theme = "inst/shiny/www/bootstrap.css",
                  tabPanel("Database", h4("Upload a database"),
-                          fileInput("file1", "Choose CSV File", multiple = FALSE,
-                                    accept = c("text/csv", "text/comma-separated-values,text/plain", ".csv"), buttonLabel = "Browse..."),
-                          hr(), span(textOutput("Alertunits"), hr( color = "purple" ), style = "color:red"),
+                          fileInput("file1",
+                                    "Choose CSV File",
+                                    multiple = FALSE,
+                                    accept = c("text/csv",
+                                               "text/comma-separated-values,text/plain",
+                                               ".csv"),
+                                    buttonLabel = "Browse..."),
+                          hr(), span(textOutput("Alertunits"),
+                                     hr( color = "purple" ),
+                                     style = "color:red"),
                           DT::dataTableOutput(outputId = "contents")),
                  tabPanel("SSD",
                           sidebarLayout(
@@ -53,11 +61,17 @@ ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution
                             mainPanel(tabsetPanel(id = "tabsetpanel",
                               tabPanel("Visualization",
                                        h4(textOutput("chemical")),
-                                       plotOutput(outputId = "database")),
+                                       shinycssloaders::withSpinner(
+                                       plotOutput(outputId = "database"),
+                                       type = 8
+                              )),
                               tabPanel("Goodness of Fit",
+                                       shinycssloaders::withSpinner(
                                        plotOutput(outputId = "plotGof",
                                                   height = 500,
                                                   width = 500),
+                                       type = 8
+                                       ),
                                        h4("Goodness of Fit"),
                                        textOutput(outputId = "bestfit"),
                                        hr(),
@@ -68,7 +82,10 @@ ui <- navbarPage(id = "navbar", "shinySSD v1.0: Species Sensitivity Distribution
                                        h6("For the correct interpretation of this extended results, the reading of the fitdistrplus package manual is recommended")),
                               tabPanel("HC5 and Plot",
                                        h6("Slide the mouse over the dots to reveal the name of the species"),
-                                       ggiraphOutput(outputId = "coolplot"),
+                                       shinycssloaders::withSpinner(
+                                         girafeOutput(outputId = "coolplot"),
+                                         type = 8
+                                         ),
                                        hr(),
                                        h4("Hazard Concentration (HC)"),
                                        textOutput(outputId = "bestfit2"),
