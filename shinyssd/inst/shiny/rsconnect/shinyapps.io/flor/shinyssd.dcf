@@ -1,0 +1,12 @@
+name: shinyssd
+title: shinyssd
+username: flor
+account: flor
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10493741
+bundleId: 7915580
+url: https://flor.shinyapps.io/shinyssd/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
