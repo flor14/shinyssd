@@ -29,7 +29,7 @@ jobs:
       - name: Authorize and deploy app
         env:
           # Provide your app name, account name, and server to be deployed below
-          APPNAME: feederwatch_app
+          APPNAME: shinyssd
           ACCOUNT: flor
           SERVER: shinyapps.io # server to deploy
         run: |
