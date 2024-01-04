@@ -1,0 +1,26 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: shinyssd
+message: >-
+  Species Sensitivity Distribution for Ecotoxicological Risk
+  Assessment
+type: software
+authors:
+  - given-names: Florencia
+    family-names: D'Andrea
+    email: florencia.dandrea@gmail.com
+    orcid: 'https://orcid.org/0000-0002-0041-097X'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.3233033
+repository-code: 'https://github.com/flor14/shinyssd'
+url: 'https://flor.shinyapps.io/shinyssd/'
+keywords:
+  - species sensitivity deistribution
+  - ecotox database
+  - ecotoxicology
+  - R-shiny
+  - ecological risk assessment
+license: MIT
